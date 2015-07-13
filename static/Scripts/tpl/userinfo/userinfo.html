@@ -1,0 +1,9 @@
+﻿<ul>
+    {{^islogin}}
+    <li class="user-login"><a href="#" id="user-login">系统登录</a></li>
+    {{/islogin}}
+    {{#islogin}}
+    <li class="user-info">欢迎您：{{username}} {{logindate}}</li>
+    <li class="user-logout"><a href="#" id="user-logout">退出系统</a></li>
+    {{/islogin}}
+</ul>

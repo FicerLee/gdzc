@@ -1,0 +1,26 @@
+﻿<div id="devicetype" class="tabcontainer">
+    <table id="devicetype-grid"></table>
+</div>
+<div id="devicetype-toolbar">
+    <div class="toolbar">
+        <ul>
+            <li><input type="text" value="" id="devicetype-category" style="width:120px;" /></li>
+            <li>
+                <a href="#" class="easyui-linkbutton" id="devicetype-btnadd" data-options="iconCls:'icon-newadd',plain:true">新增</a>
+            </li>
+            <li>
+                <a href="#" class="easyui-linkbutton" id="devicetype-btnedit" data-options="iconCls:'icon-newedit',plain:true">修改</a>
+            </li>
+            <li>
+                <a href="#" class="easyui-linkbutton" id="devicetype-btnremove" data-options="iconCls:'icon-newremove',plain:true">删除</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+</div>
+<script>
+    seajs.use('app/app.devicetype', function (devicetype) {
+        devicetype.init('#devicetype-grid');
+    });
+</script>

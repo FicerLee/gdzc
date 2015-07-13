@@ -1,0 +1,58 @@
+﻿<div id="devicerepair" class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'west',width:200,split:true">
+        <!--左边放置公司筛选-->
+        <div class="easyui-accordion" data-options="fit:true,animate:false,border:false">
+            <div title="公司及部门">
+                <ul id="devicerepair-company"></ul>
+            </div>
+            <div title="设备类别">
+                <ul id="devicerepair-category"></ul>
+            </div>
+            <div title="资产属性">
+                <ul id="devicerepair-assetproperty"></ul>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center'">
+        <table id="devicerepair-grid"></table>
+    </div>
+</div>
+<div id="devicerepair-toolbar">
+    <div class="toolbar">
+        <a id="devicerepair-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增设备维修</a>
+        <a id="devicerepair-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出</a>
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li>
+                <span>关键词：</span>
+                <input type="text" value="" id="devicerepair-key" class="easyui-textbox" />
+            </li>
+            <li>
+                <span>维修状态：</span>
+                <input type="text" value="" id="devicerepair-status" style="width:120px;" />
+            </li>
+            <li>
+                <span>维修时间：</span>
+                <input type="text" value="" id="devicerepair-startdate" class="easyui-datebox" data-options="editable:false" style="width:120px;" />
+            </li>
+            <li>
+                <a id="devicerepair-btnsearch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="devicerepair-grid-contextmenu" class="easyui-menu" data-options="width:180">
+    <div data-options="name:'devicerepair-showDeviceInfo',iconCls:'icon-view'">该设备详细信息...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'devicerepair-showUserInfo',iconCls:'icon-person'">设备使用人信息...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'devicerepair-showAuditRepairDeviceConfirm',iconCls:'icon-ok'">设备维修结果确认...</div>
+</div>
+<script>
+    seajs.use('app/app.devicerepair', function (devicerepair) {
+        devicerepair.init('#devicerepair-grid');
+    });
+</script>

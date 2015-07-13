@@ -1,0 +1,28 @@
+﻿#navmenu{
+    padding:5px;
+    padding-bottom:50px;
+}
+.icon-announce{
+    background:url('images/bell.png') no-repeat center center;
+}
+.icon-person{
+    background:url('images/user.png') no-repeat center center;
+}
+.icon-group{
+    background:url('images/group.png') no-repeat center center;
+}
+.icon-device{
+    background:url('images/computer.png') no-repeat center center;
+}
+.icon-plan{
+    background:url('images/plan.png') no-repeat center center;
+}
+.icon-system{
+    background:url('images/system.png') no-repeat center center;
+}
+.icon-policy{
+    background:url('images/policy.png') no-repeat center center;
+}
+.icon-audit{
+    background:url('images/audit.png') no-repeat center center;
+}

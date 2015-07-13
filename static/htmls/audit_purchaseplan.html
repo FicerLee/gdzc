@@ -1,0 +1,41 @@
+﻿<div class="tabcontainer">
+    <table id="auditpurchaseplan-grid"></table>
+</div>
+<div id="auditpurchaseplan-toolbar">
+    <div class="toolbar">
+        <a href="" id="auditpurchaseplan-btnexport" data-options="iconCls:'icon-export',plain:true" class="easyui-linkbutton">导出清单</a>
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li>
+                投资年度：
+                <input type="text" value="" id="auditpurchaseplan-year" style="width:80px;" />
+            </li>
+            <li>
+                设备归属：
+                <input type="text" value="" id="auditpurchaseplan-belong" style="width:120px;" />
+            </li>
+            <li>
+                审核状态：
+                <input type="text" value="" id="auditpurchaseplan-state" style="width:100px;" />
+            </li>
+            <li>
+                <a href="" id="auditpurchaseplan-btnsearch" data-options="iconCls:'icon-search',plain:true" class="easyui-linkbutton"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="auditpurchaseplan-contextmenu" class="easyui-menu">
+    <div name="auditpurchaseplan-doPass" data-options="iconCls:'icon-ok'">审核通过</div>
+    <div name="auditpurchaseplan-doReject" data-options="iconCls:'icon-undo'">审核退回</div>
+    <div name="auditpurchaseplan-doRemove" data-options="iconCls:'icon-newremove'">审核删除</div>
+    <div class="menu-sep"></div>
+    <div name="auditpurchaseplan-doType" data-options="iconCls:'icon-view'">设备高级选型...</div>
+</div>
+<script>
+    seajs.use('app/app.auditpurchaseplan', function (plan) {
+        plan.init('#auditpurchaseplan-grid');
+    });
+</script>

@@ -1,0 +1,122 @@
+﻿<table id="auditdeviceuser-form">
+    <tr>
+        <td class="text-right" style="width:120px;">姓名：</td>
+        <td style="width:120px;">
+            {{#username}}
+            {{#oldvalue}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            {{/oldvalue}}
+            {{#newvalue}}
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/newvalue}}
+            {{/username}}
+        </td>
+        <td class="text-right" style="width:120px;">所在公司：</td>
+        <td>
+            {{#companyname}}
+            {{#oldvalue}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            {{/oldvalue}}
+            {{#newvalue}}
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/newvalue}}
+            {{/companyname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">所在科室：</td>
+        <td>
+            {{#departmentname}}
+            {{#oldvalue}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            {{/oldvalue}}
+            {{#newvalue}}
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/newvalue}}
+            {{/departmentname}}
+        </td>
+        <td class="text-right">岗位名称：</td>
+        <td>
+            {{#postname}}
+            {{#oldvalue}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            {{/oldvalue}}
+            {{#newvalue}}
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/newvalue}}
+            {{/postname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">岗位性质：</td>
+        <td>
+            {{#postpropertyname}}
+            {{#oldvalue}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            {{/oldvalue}}
+            {{#newvalue}}
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/newvalue}}
+            {{/postpropertyname}}
+        </td>
+        <td class="text-right">员工性质：</td>
+        <td>
+            {{#workpropertyname}}
+            {{#oldvalue}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            {{/oldvalue}}
+            {{#newvalue}}
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/newvalue}}
+            {{/workpropertyname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">提交审核：</td>
+        <td>
+            {{creatorname}}
+        </td>
+        <td class="text-right">申请时间：</td>
+        <td>
+            {{createddate}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">审核状态：</td>
+        <td colspan="3">
+            {{statusname}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a href="" class="easyui-linkbutton" id="auditdeviceuser-form-btnsubmit" style="width:100px;" data-options="iconCls:'icon-ok'">审核通过</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdeviceuser-form-btnreject" style="width:100px;" data-options="iconCls:'icon-undo'">审核退回</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdeviceuser-form-btnremove" style="width:100px;" data-options="iconCls:'icon-newremove'">审核删除</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdeviceuser-form-btnresubmit" style="width:100px;" data-options="iconCls:'icon-redo'">再次提交</a>
+        </td>
+    </tr>
+</table>

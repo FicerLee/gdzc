@@ -1,0 +1,16 @@
+﻿<div class="tabcontainer" id="role">
+    <table id="role-grid"></table>
+</div>
+<div id="role-toolbar">
+    <a id="role-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增组名称</a>
+    <a id="role-btnedit" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改组名称</a>
+    <a id="role-btnremove" class="easyui-linkbutton" data-options="iconCls:'icon-newremove',plain:true">删除组信息</a>
+</div>
+<div id="role-contextmenu" class="easyui-menu">
+    <div data-options="name:'role-doModifyPolicy',iconCls:'icon-newedit'">更新组权限...</div>
+</div>
+<script>
+    seajs.use('app/app.role', function (role) {
+        role.init('#role-grid');
+    });
+</script>

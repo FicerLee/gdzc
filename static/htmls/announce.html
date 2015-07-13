@@ -1,0 +1,32 @@
+﻿<div id="announce" style="height:100%;overflow:hidden;">
+    <table id="announce-grid"></table>
+</div>
+<div id="announce-toolbar">
+    <div class="toolbar">
+        <a id="announce-btnadd" href="" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增</a>
+        <a id="announce-btnedit" href="" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改</a>
+        <a id="announce-btnremove" href="" class="easyui-linkbutton" data-options="iconCls:'icon-newremove',plain:true">删除</a>
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li>
+                <input type="text" value="" id="announce-key" class="easyui-textbox" data-options="prompt:'关键词'" />
+            </li>
+            <li>
+                <label>时间范围:从</label>
+                <input type="text" value="" id="announce-startdate" class="easyui-datebox" data-options="editable:false" />&nbsp;至
+                <input type="text" value="" id="announce-enddate" class="easyui-datebox" data-options="editable:false" />
+            </li>
+            <li>
+                <a id="announce-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">查询</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    seajs.use('app/app.announce', function (announce) {
+        announce.init('#announce-grid');
+    });
+</script>

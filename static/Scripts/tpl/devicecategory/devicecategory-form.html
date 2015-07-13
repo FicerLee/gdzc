@@ -1,0 +1,19 @@
+﻿<table id="devicecategory-form">
+    <tr>
+        <td style="width:180px;" class="text-right">设备类型：</td>
+        <td>
+            <input type="text" value="{{categoryname}}" id="devicecategory-form-categoryname" class="easyui-validatebox textbox" data-options="required:true" style="width:180px;"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">计划参考价（单位：万元）</td>
+        <td>
+            <input type="text" value="{{planreferenceprice}}" id="devicecategory-form-planreferenceprice" class="easyui-numberbox" data-options="min:0,precision:3,prefix:'&#65509;'" style="width:80px;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a href="" class="easyui-linkbutton" id="devicecategory-form-btnsave" style="width:100px;" data-options="iconCls:'icon-save'">保存</a>
+        </td>
+    </tr>
+</table>

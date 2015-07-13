@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="easyUI" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/Scripts/jquery.easyui-1.4.2.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/Scripts/jquery.easyui-1.4.2.js" />
+    </CLASSES>
+    <DOCUMENTATION>
+      <root url="http://jeasyui.com/documentation/index.php" />
+    </DOCUMENTATION>
+    <SOURCES />
+  </library>
+</component>

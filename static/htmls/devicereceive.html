@@ -1,0 +1,37 @@
+﻿<div id="devicereceive" class="tabcontainer">
+    <table id="devicereceive-grid"></table>
+</div>
+<div id="devicereceive-toolbar">
+    <div class="toolbar">
+        <a id="devicereceive-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增领用</a>
+        <a id="devicereceive-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出领用记录</a>
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li>
+                <input type="text" value="" id="devicereceive-key" class="easyui-textbox" data-options="prompt:'请输入关键词'" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicereceive-category" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicereceive-workproperty" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicereceive-company" />
+                <a id="devicereceive-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="devicereceive-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'devicereceive-showDeviceInfo'">查看设备详细信息...</div>
+    <div data-options="name:'devicereceive-showUserInfo'">查看设备使用人详细信息...</div>
+</div>
+<script>
+    seajs.use('app/app.devicereceive', function (devicereceive) {
+        devicereceive.init('#devicereceive-grid');
+    });
+</script>

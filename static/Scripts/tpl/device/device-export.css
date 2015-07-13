@@ -1,0 +1,7 @@
+﻿#device-export{
+    width:100%;
+}
+#device-export td{
+    padding:3px;
+    border:1px solid #e0e0e0;
+}

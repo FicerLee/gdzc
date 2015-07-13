@@ -1,0 +1,49 @@
+﻿<table id="device-stop">
+    <tr>
+        <td class="text-right" style="width:120px;">
+            <span class="text-red">设备型号：</span>
+        </td>
+        <td style="width:180px;"><span class="text-red">{{deviceno}}</span></td>
+        <td class="text-right" style="width:120px;">资产编码：</td>
+        <td>{{assetno}}</td>
+    </tr>
+    <tr>
+        <td class="text-right">当前使用人：</td>
+        <td>{{username}}</td>
+        <td class="text-right">设备类别：</td>
+        <td>{{categoryname}}</td>
+    </tr>
+    <tr>
+        <td class="text-right">使用地点：</td>
+        <td>{{useaddress}}</td>
+        <td class="text-right">启用日期：</td>
+        <td>{{enabledate}}</td>
+    </tr>
+    <tr>
+        <td class="text-right">资产属性：</td>
+        <td>
+            <span class="text-red">{{assetpropertyname}}</span>
+        </td>
+        <td class="text-right">资产归属：</td>
+        <td><span class="text-red">{{assetbelongname}}</span></td>
+    </tr>
+    <tr>
+        <td class="text-right"><span class="text-red">选择停用状态</span>：</td>
+        <td>
+            <input type="text" value="" id="device-stop-status" />
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="text-top text-right">备注说明：</td>
+        <td colspan="3" style="height:100px;" class="text-top">
+            <input type="text" value="{{auditmemo}}" id="device-stop-memo" class="easyui-textbox" data-options="multiline:true" style="width:100%;height:100%;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a id="device-stop-btnsave" href="" class="easyui-linkbutton" style="width:100px;" data-options="iconCls:'icon-save'">提交审核</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,146 @@
+﻿<table id="import-edit" class="table-form">
+    <tr>
+        <td class="text-right" style="width:120px;">导入提示：</td>
+        <td colspan="3" style="height:50px;" class="text-top">
+            <span class="text-red text-err" style="padding-left:25px;">
+                {{message}}
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产编码：</td>
+        <td>
+            <input type="text" value="{{assetno}}" id="import-edit-assetno" class="easyui-textbox" style="width:120px;" />
+        </td>
+        <td class="text-right" style="width:120px;">设备型号：</td>
+        <td>
+            <input type="text" value="{{deviceno}}" id="import-edit-deviceno" class="easyui-validatebox textbox" data-options="required:true" style="width:120px;"  />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">设备类别：</td>
+        <td>
+            <input type="text" value="{{categoryid}}" id="import-edit-category" />
+        </td>
+        <td class="text-right">资产类型：</td>
+        <td>
+            <input type="text" value="{{assetcategoryid}}" id="import-edit-assetcategory" style="width:120px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产属性：</td>
+        <td>
+            <input type="text" value="{{assetpropertyid}}" id="import-edit-assetproperty" style="width:120px;" />
+        </td>
+        <td class="text-right">使用状态：</td>
+        <td>
+            <input type="text" value="{{statusid}}" id="import-edit-status" style="width:100px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产归属：</td>
+        <td>
+            <input type="text" value="{{assetbelongid}}" id="import-edit-belong" style="width:120px;"  />
+        </td>
+        <td class="text-right">
+            <input type="checkbox" value="" id="import-edit-ispublic" class="css-checkbox" {{#ispublic}} checked="checked" {{/ispublic}} />
+            <label class="css-label" for="import-edit-ispublic" >公用设备？</label>
+        </td>
+        <td>
+            <input type="checkbox" value="" id="import-edit-isrepaired" class="css-checkbox" {{#isrepaired}} checked="checked" {{/isrepaired}} />
+            <label class="css-label" for="import-edit-isrepaired">是否维修？</label>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">使用人：</td>
+        <td>
+            <input type="text" value="{{deviceusername}}" id="import-edit-deviceuser" class="easyui-textbox" style="width:80px;" />
+        </td>
+        <td class="text-right">所在公司：</td>
+        <td>
+            <input type="text" value="{{companyid}}" id="import-edit-company" style="width:120px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">所在部门：</td>
+        <td>
+            <input type="text" value="{{departmentid}}" id="import-edit-department" style="width:120px;" />
+        </td>
+        <td class="text-right">岗位名称：</td>
+        <td>
+            <input type="text" value="{{postname}}" id="import-edit-postname" class="easyui-textbox" style="width:120px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">岗位性质：</td>
+        <td>
+            <input type="text" value="{{postpropertyid}}" id="import-edit-postproperty" style="width:120px;" />
+        </td>
+        <td class="text-right">用工性质：</td>
+        <td>
+            <input type="text" value="{{workpropertyid}}" id="import-edit-workproperty" style="width:120px;" />
+        </td>
+
+    </tr>
+    <tr>
+        <td class="text-right">启用日期：</td>
+        <td>
+            <input type="text" value="{{enabledate}}" id="import-edit-enabledate" class="easyui-datebox" style="width:120px;" />
+        </td>
+        <td class="text-right">使用年限：</td>
+        <td>
+            <input type="text" value="{{limityears}}" id="import-edit-limityears" class="easyui-numberbox" data-options="min:1" style="width:80px;" />（年）
+        </td>
+
+    </tr>
+    <tr>
+        <td class="text-right">保期：</td>
+        <td>
+            <input type="text" value="{{protectyears}}" id="import-edit-protectyears" class="easyui-numberbox" data-options="min:1" style="width:80px;" />（年）
+        </td>
+        <td class="text-right">租赁合同：</td>
+        <td>
+            <input type="text" value="{{leasecontractno}}" id="import-edit-leasecontractno" class="easyui-textbox" />
+        </td>
+
+    </tr>
+    <tr>
+        <td class="text-right">使用地点：</td>
+        <td>
+            <input type="text" value="{{useaddress}}" id="import-edit-useaddress" class="easyui-textbox" style="width:180px;" />
+        </td>
+        <td class="text-right">资产原值：</td>
+        <td>
+            <input type="text" value="{{originalvalue}}" id="import-edit-originalvlaue" class="easyui-numberbox" data-options="precision:2" />
+        </td>
+
+    </tr>
+    <tr>
+        <td class="text-right">CPU：</td>
+        <td>
+            <input type="text" value="{{cpu}}" id="import-edit-cpu" class="easyui-textbox" style="width:120px;" />
+        </td>
+        <td class="text-right">内存：</td>
+        <td>
+            <input type="text" value="{{memory}}" id="import-edit-memory" class="easyui-textbox" style="width:120px;" />
+        </td>
+
+    </tr>
+    <tr>
+        <td class="text-right">硬盘：</td>
+        <td>
+            <input type="text" value="{{harddisk}}" id="import-edit-harddisk" class="easyui-textbox" style="width:120px;" />
+        </td>
+        <td class="text-right">出厂编号：</td>
+        <td>
+            <input type="text" value="{{productno}}" id="import-edit-productno" style="width:100px;" class="easyui-textbox" />
+        </td>
+
+    </tr>
+    <tr>
+        <td class="text-right text-top">备注：</td>
+        <td class="text-top" style="height:50px;" colspan="3">
+            <input type="text" value="{{memo}}" id="import-edit-memo" class="easyui-textbox" data-options="multiline:true" style="width:100%;height:100%;" />
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,35 @@
+﻿<div class="tabcontainer">
+    <table id="prepurchase-grid"></table>
+</div>
+<div id="prepurchase-toolbar">
+    <div class="toolbar">
+        <a href="#" id="prepurchase-btnadd" data-options="iconCls:'icon-newadd',plain:true" class="easyui-linkbutton">新增投资申请</a>
+        <a href="#" id="prepurchase-btnexport" data-options="iconCls:'icon-export',plain:true" class="easyui-linkbutton">导出清单</a>
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li>
+                申请年度：
+                <input type="text" value="" id="prepurchase-year" style="width:80px;" />
+            </li>
+            <li>
+                设备归属：
+                <input type="text" value="" id="prepurchase-belong" style="width:120px;" />
+            </li>
+            <li>
+                审核状态：
+                <input type="text" value="" id="prepurchase-state" style="width:100px;" />
+            </li>
+            <li>
+                <a href="" id="prepurchase-btnsearch" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"></a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    seajs.use('app/app.prepurchase', function (prepurchase) {
+        prepurchase.init('#prepurchase-grid');
+    });
+</script>

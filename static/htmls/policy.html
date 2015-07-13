@@ -1,0 +1,26 @@
+﻿<div id="policy" class="tabcontainer">
+    <table id="policy-grid"></table>
+</div>
+<div id="policy-toolbar">
+    <div class="toolbar">
+        <a id="policy-btnadd" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newadd'">新增</a>
+        <a id="policy-btnedit" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newedit'">修改</a>
+        <a id="policy-btnremove" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newremove'">删除</a>
+    </div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <input type="text" value="" id="policy-key" class="easyui-textbox" data-options="prompt:'请输入关键词'" />
+            </li>
+            <li>
+                <a id="policy-btnsearch" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">查询</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    seajs.use('app/app.policy', function (policy) {
+        policy.init('#policy-grid');
+    });
+</script>

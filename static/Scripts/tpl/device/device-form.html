@@ -1,0 +1,130 @@
+﻿<table id="device-form">
+    <tr>
+        <td class="text-right" style="width:160px;">资产编码：</td>
+        <td style="width:200px;">
+            <input type="text" value="{{assetno}}" id="device-form-assetno" class="easyui-textbox" style="width:120px;" />
+        </td>
+        <td class="text-right" style="width:160px;"></td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">设备型号：</td>
+        <td colspan="3">
+            <input type="text" value="{{deviceno}}" id="device-form-deviceno" class="easyui-validatebox textbox" data-options="required:true" style="width:220px;"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">使用人：</td>
+        <td>
+            <input type="text" value="{{deviceuserid}}" id="device-form-deviceuser" />
+        </td>
+        <td class="text-right">使用地点：</td>
+        <td>
+            <input type="text" value="{{useaddress}}" id="device-form-useaddress" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">设备类型：</td>
+        <td>
+            <input type="text" value="{{categoryid}}" id="device-form-category" style="width:160px;" />
+        </td>
+        <td class="text-right">资产归属：</td>
+        <td>
+            <input type="text" value="{{assetbelongid}}" id="device-form-assetbelong" style="width:120px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产属性：</td>
+        <td>
+            <input type="text" value="{{assetpropertyid}}" id="device-form-assetproperty" style="width:100px;" />
+        </td>
+        <td class="text-right">出厂编号：</td>
+        <td>
+            <input type="text" value="{{productno}}" id="device-form-productno" class="easyui-textbox" style="width:100px;" />
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input type="checkbox" value="" id="device-form-isrepaired" {{#isrepaired}} checked="checked" {{/isrepaired}} />
+            是否维修
+
+        </td>
+        <td class="text-right">启用日期：</td>
+        <td>
+            <input type="text" value="{{enabledate}}" id="device-form-enabledate" class="easyui-datebox" style="width:100px;" data-options="editable:false" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">使用年限：</td>
+        <td>
+            <input type="text" value="{{limityears}}" id="device-form-limityears" class="easyui-numberbox" data-options="min:1" style="width:60px;" />（单位：年）
+        </td>
+        <td class="text-right">保修期限：</td>
+        <td>
+            <input type="text" value="{{protectyears}}" id="device-form-protectyears" class="easyui-numberbox" data-options="min:1" style="width:60px;" />（单位：年）
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">租赁合同号：</td>
+        <td>
+            <input type="text" value="{{leasecontractno}}" id="device-form-leasecontractno" class="easyui-textbox" style="width:120px;" />
+        </td>
+        <td class="text-right">资产类别：</td>
+        <td>
+            <input type="text" value="{{assetcategoryid}}" id="device-form-assetcategory" style="width:100px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产原值：</td>
+        <td>
+            <input type="text" value="{{assetoriginalvalue}}" id="device-form-assetoriginalvalue" class="easyui-numberbox" data-options="min:0,precision:3" style="width:100px;" />（单位：万元）
+        </td>
+        <td class="text-right">当前状态：</td>
+        <td>
+            <input type="text" value="{{statusid}}" id="device-form-status" style="width:100px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-top text-right">台式电脑额外信息：</td>
+        <td colspan="3">
+            <table>
+                <tr>
+                    <td style="width:60px;" class="text-right">CPU：</td>
+                    <td>
+                        <input type="text" value="{{cpu}}" id="device-form-cpu" class="easyui-textbox" style="width:220px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">内存：</td>
+                    <td>
+                        <input type="text" value="{{memory}}" id="device-form-memory" class="easyui-textbox" style="width:220px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">硬盘：</td>
+                    <td>
+                        <input type="text" value="{{harddisk}}" id="device-form-harddisk" class="easyui-textbox" style="width:220px;" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-top text-right">备注：</td>
+        <td colspan="3" class="text-top" style="height:60px;">
+            <input type="text" value="{{memo}}" id="device-form-memo" data-options="multiline:true" class="easyui-textbox" style="height:99%;width:99%;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-right">
+            设备登记日期:<span class="text-red text-bold">{{createddate}}</span>
+        </td>
+        <td colspan="2" class="text-center">
+            <a href="" id="device-form-btnsave" data-options="iconCls:'icon-save'" style="width:100px;" class="easyui-linkbutton">提交审核</a>
+            &nbsp;&nbsp;
+            <a href="" id="device-form-btnclose" data-options="iconCls:'icon-cancel'" style="width:100px;" class="easyui-linkbutton">关闭</a>
+        </td>
+    </tr>
+</table>

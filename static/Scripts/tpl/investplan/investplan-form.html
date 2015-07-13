@@ -1,0 +1,41 @@
+﻿<table id="investplan-form">
+    <tr>
+        <td class="text-right" style="width:120px;">
+            新增设备类型：
+        </td>
+        <td>
+            <input type="text" value="{{categoryid}}" id="investplan-form-category" style="width:120px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">
+            选择使用部门：
+        </td>
+        <td>
+            <input type="text" value="{{departmentid}}" id="investplan-form-department" style="width:120px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">岗位性质：</td>
+        <td>
+            <input type="text" value="{{postpropertyid}}" id="investplan-form-postproperty" style="width:120px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">设备数量：</td>
+        <td>
+            <input type="text" value="{{devicecount}}" id="investplan-form-devicecount"  class="easyui-numberbox" data-options="min:1,precision:0,required:true" style="width:60px;"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-top text-right" style="height:50px;">备注说明：</td>
+        <td>
+            <input type="text" value="{{memo}}" id="investplan-form-memo" class="easyui-textbox" data-options="multiline:true" style="width:100%;height:100%;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a href="" class="easyui-linkbutton" id="investplan-form-btnsave" style="width:100px;" data-options="iconCls:'icon-newadd'">确认新增</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,18 @@
+﻿<div id="workproperty" class="tabcontainer">
+    <table id="workproperty-grid"></table>
+</div>
+<div id="workproperty-toolbar">
+    <div class="toolbar">
+        <a href="#" id="workproperty-btnadd" data-options="iconCls:'icon-newadd',plain:true" class="easyui-linkbutton">新增员工性质</a>
+    </div>
+</div>
+<div id="workproperty-contextmenu" class="easyui-menu">
+    <div data-options="name:'workproperty-doAdd',iconCls:'icon-newadd'">新增员工性质...</div>
+    <div data-options="name:'workproperty-doEdit',iconCls:'icon-newedit'">修改员工性质...</div>
+    <div data-options="name:'workproperty-doRemove',iconCls:'icon-newremove'">删除员工性质</div>
+</div>
+<script>
+    seajs.use('app/app.workproperty', function (workproperty) {
+        workproperty.init('#workproperty');
+    });
+</script>

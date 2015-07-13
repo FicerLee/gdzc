@@ -1,0 +1,7 @@
+﻿#device-stop{
+    width:100%;
+}
+#device-stop td{
+    padding:3px;
+    border:1px solid #e0e0e0;
+}

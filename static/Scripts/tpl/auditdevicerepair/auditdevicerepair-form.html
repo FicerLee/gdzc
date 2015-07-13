@@ -1,0 +1,50 @@
+﻿<table id="auditdevicerepair-form">
+    <tr>
+        <td class="text-right" style="width:120px;">资产编码：</td>
+        <td style="width:120px;">
+            {{assetno}}
+        </td>
+        <td class="text-right" style="width:120px;">设备型号：</td>
+        <td>
+            {{deviceno}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">
+           申请维修时间：
+        </td>
+        <td>
+            <span class="text-red">{{createddate}}</span>
+        </td>
+        <td class="text-right">
+            维修开始时间：
+        </td>
+        <td>
+            <span class="text-red">{{repairstartdate}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">维修结束时间：</td>
+        <td>
+            {{repairenddate}}
+        </td>
+        <td class="text-right">维修地点：</td>
+        <td>
+            {{repairplace}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">维修原因：</td>
+        <td colspan="3" class="text-top" style="height:60px;">
+            {{repairreason}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a href="" class="easyui-linkbutton" id="auditdevicerepair-form-btnsubmit" style="width:100px;" data-options="iconCls:'icon-ok'">审核通过</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdevicerepair-form-btnreject" style="width:100px;" data-options="iconCls:'icon-undo'">审核退回</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdevicerepair-form-btnremove" style="width:100px;" data-options="iconCls:'icon-newremove'">审核删除</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdevicerepair-form-btnresubmit" style="width:100px;" data-options="iconCls:'icon-redo'">再次提交</a>
+        </td>
+    </tr>
+</table>

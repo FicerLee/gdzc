@@ -1,0 +1,21 @@
+﻿<div id="company" class="tabcontainer">
+    <table id="company-grid"></table>
+</div>
+<div id="company-toolbar">
+    <div class="toolbar">
+        <a id="company-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增公司节点</a>
+    </div>
+</div>
+<div class="easyui-menu" id="company-grid-contextmenu">
+    <div data-options="name:'company-showAdd',iconCls:'icon-newadd'">新增</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'company-showEdit',iconCls:'icon-newedit'">修改</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'company-showRemove',iconCls:'icon-newremove'">删除</div>
+</div>
+<script>
+    seajs.use('app/app.company', function (company) {
+        company.init('#company-grid');
+    });
+</script>
+

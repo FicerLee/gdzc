@@ -1,0 +1,68 @@
+﻿<div id="device" class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'west',width:200,split:true">
+        <!--左边放置公司筛选-->
+        <div class="easyui-accordion" data-options="fit:true,animate:false,border:false">
+            <div title="公司及部门">
+                <ul id="device-company"></ul>
+            </div>
+            <div title="设备类别">
+                <ul id="device-devicecategory"></ul>
+            </div>
+            <div title="资产属性">
+                <ul id="device-assetproperty"></ul>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center'">
+        <table id="device-grid"></table>
+    </div>
+</div>
+<div id="device-toolbar">
+    <div class="toolbar">
+        <a id="device-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增设备</a>
+        <a id="device-btnedit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改设备属性</a>
+        <a id="device-btnremove" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newremove',plain:true">删除设备</a>
+        <a id="device-btnimport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-import',plain:true">批量导入设备</a>
+        <a id="device-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出设备总清单</a>
+    </div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <input type="text" value="" id="device-key" class="easyui-textbox" data-options="prompt:'关键词'" />
+            </li>
+            <li>
+                <span>用工性质：</span>
+                <input type="text" value="" id="device-workproperty" style="width:120px;" />
+            </li>
+            <li>
+                <span>岗位性质：</span>
+                <input type="text" value="" id="device-postproperty" style="width:140px;" />
+            </li>
+            <li>
+                <a id="device-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="device-grid-contextmenu" class="easyui-menu" data-options="width:120">
+    <div>
+        <span>查看</span>
+        <div style="width:160px;">
+            <div data-options="name:'device-showDeviceinfo'">该设备详细信息...</div>
+            <div data-options="name:'device-showDeiveUserecord'">设备使用记录...</div>
+            <div data-options="name:'device-showRepairrecord'">设备维修记录...</div>
+            <div data-options="name:'device-showUserinfo'">设备使用人信息...</div>
+            <div data-options="name:'device-showAuditrecord'">设备审核历史记录....</div>
+            <div data-options="name:'device-showAssetpropertyrecord'">资产属性变更记录...</div>
+        </div>
+    </div>
+    <div data-options="name:'device-showNewuse'">设备领用...</div>
+    <div data-options="name:'device-showAssettransfer'">设备资产转移...</div>
+    <div data-options="name:'device-showStopdevice'">设备停用...</div>
+</div>
+<script>
+    seajs.use('app/app.device', function (device) {
+        device.init('#device-grid');
+    });
+</script>

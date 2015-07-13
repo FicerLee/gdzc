@@ -1,0 +1,25 @@
+﻿<table id="announce-form">
+    <tr>
+        <td colspan="2">
+            发布人：{{username}}&nbsp;&nbsp;
+            发布时间：{{pubdate}}
+        </td>
+    </tr>
+    <tr>
+        <td style="width:100px;" class="text-right">标题：</td>
+        <td>
+            <input type="text" value="{{title}}" id="announce-form-title" class="easyui-validatebox textbox" data-options="required:true" style="width:260px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right text-top">通知明细：</td>
+        <td class="text-top" style="height:200px;">
+            <script id="announce-form-pubcontent" type="text/plain" style="width:100%;height:100%;"></script>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a id="announce-form-save" href="" class="easyui-linkbutton" data-options="iconCls:'icon-save',width:120">保存</a>
+        </td>
+    </tr>
+</table>

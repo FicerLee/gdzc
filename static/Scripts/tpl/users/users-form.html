@@ -1,0 +1,82 @@
+﻿<table id="users-form">
+    <tr>
+        <td style="width:160px;" class="text-right">用户姓名：</td>
+        <td>
+            <input type="text" value="{{username}}" class="easyui-validatebox textbox" id="users-form-username" data-options="required:true" style="width:100px;" />
+            <a href="#" class="easyui-linkbutton" id="users-form-btnchangepinyin" data-options="iconCls:'icon-reload',plain:true">生成默认账号</a>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">登录账号：</td>
+        <td>
+            <input type="text" value="{{usercode}}" id="users-form-usercode" class="easyui-validatebox textbox"  data-options="required:true" style="width:100px;"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">登录密码：</td>
+        <td>
+            <input type="password" value="{{userpass}}" class="easyui-validatebox textbox" id="users-form-userpass" data-options="required:true" style="width:100px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">所属公司（或部门）：</td>
+        <td>
+            <input type="text" value="{{companyid}}" id="users-form-company" style="width:180px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">所属角色：</td>
+        <td>
+            <input type="text" value="{{roleid}}" id="users-form-role" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">用户状态：</td>
+        <td>
+            <input type="text" value="{{statusid}}" id="users-form-status" style="width:120px;" data-options="required:true"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">联系电话：</td>
+        <td>
+            <input type="text" value="{{contactphone}}" id="users-form-contactphone" style="width:180px;" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">
+            <input type="checkbox" id="users-form-enablesubmitinvestplan" {{#enablesubmitinvestplan}}checked="checked"{{/enablesubmitinvestplan}}/>
+        </td>
+        <td>
+            允许提交投资计划申请
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">
+            <input type="checkbox" id="users-form-enablesubmitdevicescrap" {{#enablesubmitdevicescrap}}checked="checked"{{/enablesubmitdevicescrap}} />
+        </td>
+        <td>
+            允许提交设备报废申请
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">
+            <input type="checkbox" id="users-form-enablebulkdataentry" {{#enablebulkdataentry}}checked="checked"{{/enablebulkdataentry}} />
+        </td>
+        <td>
+            允许执行数据批量录入
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">
+            <input type="checkbox" value="{{allowviewimport}}" id="users-form-enableviewpurchaselist" {{#enableviewpurchaselist}}checked="checked"{{/enableviewpurchaselist}} />
+        </td>
+        <td>
+            允许查看采购清单
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a href="" class="easyui-linkbutton" id="users-form-btnsave" data-options="iconCls:'icon-save',width:100">保存</a>
+        </td>
+    </tr>
+</table>

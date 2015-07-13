@@ -1,0 +1,26 @@
+﻿<table id="investplan-planform">
+    <tr>
+        <td style="height:400px;">
+            <div class="easyui-accordion" data-options="fit:true">
+                <div title="设备折旧清单明细" data-options="tools:[{
+                      iconCls:'icon-reload',
+                      handler:function(){
+                         $('#investplan-planform-grid').datagrid('reload');
+                     }
+                     }
+                     ]">
+                    <table id="investplan-planform-grid"></table>
+                </div>
+                <div title="新增设备明细">
+                    <table id="investplan-planform-newgrid"></table>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-center">
+            <a href="" class="easyui-linkbutton" id="investplan-planform-btnsubmit" style="width:100px;" data-options="iconCls:'icon-submit'">提交计划</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="investplan-planform-btnsave" style="width:100px;" data-options="iconCls:'icon-save'">暂不提交</a>&nbsp;
+        </td>
+    </tr>
+</table>

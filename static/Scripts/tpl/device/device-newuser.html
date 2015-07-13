@@ -1,0 +1,45 @@
+﻿<table id="device-newuser">
+    <tr>
+        <td style="width:120px;" class="text-right">设备型号：</td>
+        <td style="width:180px;">{{deviceno}}</td>
+        <td style="width:120px;" class="text-right">资产编码：</td>
+        <td>{{assetno}}</td>
+    </tr>
+    <tr>
+        <td class="text-right">资产属性：</td>
+        <td>{{assetpropertyname}}</td>
+        <td class="text-right">资产类别：</td>
+        <td>{{assetcategoryname}}</td>
+    </tr>
+    <tr>
+        <td class="text-right">出厂编号：</td>
+        <td>{{productno}}</td>
+        <td class="text-right">租赁合同：</td>
+        <td>{{leasecontractno}}</td>
+    </tr>
+    <tr>
+        <td class="text-right">资产归属：</td>
+        <td>
+            {{assetbelongname}}
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="text-right">选择使用人：</td>
+        <td>
+            <input type="text" value="{{deviceuserid}}" id="device-newuser-user" />
+        </td>
+        <td class="text-right">
+            使用地点：
+        </td>
+        <td>
+            <input type="text" value="{{useaddress}}" id="device-newuser-useaddress" class="easyui-textbox" style="width:100%;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a id="device-newuser-btnsave" href="" class="easyui-linkbutton" style="width:100px;" data-options="iconCls:'icon-save'">提交审核</a>
+        </td>
+    </tr>
+</table>

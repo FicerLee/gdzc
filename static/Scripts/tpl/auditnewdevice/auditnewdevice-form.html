@@ -1,0 +1,108 @@
+﻿<table id="auditnewdevice-form">
+    <tr>
+        <td class="text-right" style="width:120px;">申请提交时间：</td>
+        <td style="width:130px;">
+            <span class="text-bold text-red">{{createddate}}</span>
+        </td>
+        <td class="text-right" style="width:120px;">申请人：</td>
+        <td>
+            <span class="text-red">{{creatorname}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right" >资产编码：</td>
+        <td >
+            <span class="text-red">{{assetno}}</span>
+        </td>
+        <td class="text-right" >设备型号：</td>
+        <td>
+            <span class="text-red">{{deviceno}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">出厂编号：</td>
+        <td>
+            <span class="text-red">{{productno}}</span>
+        </td>
+        <td class="text-right">设备类型：</td>
+        <td>
+            <span class="text-red">{{categoryname}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产类型：</td>
+        <td>
+            <span class="text-red">{{assetcategoryname}}</span>
+        </td>
+        <td class="text-right">设备状态：</td>
+        <td>
+            <span class="text-red">{{devicestatusname}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产属性：</td>
+        <td>
+            {{assetpropertyname}}
+        </td>
+        <td class="text-right">资产归属：</td>
+        <td>
+            {{assetbelongname}}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">设备使用人所在公司（部门）：
+            <span class="text-bold text-red">{{deviceusername}}（{{deviceuserworkpropertyname}})</span>
+            -{{deviceusercompanyname}}-{{deviceuserdepartmentname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">岗位名称：</td>
+        <td>
+            {{deviceuserpostname}}
+        </td>
+        <td class="text-right">岗位属性：</td>
+        <td>
+            {{deviceuserpostpropertyname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">启用日期：</td>
+        <td>
+            {{enabledate}}
+        </td>
+        <td class="text-right">使用年限：</td>
+        <td>
+            {{limityears}}（单位：年）
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">质保年限：</td>
+        <td>
+            {{protectyears}}（单位：年）
+        </td>
+        <td class="text-right">资产原值：</td>
+        <td>
+            {{assetoriginalvalue}}（单位：万元）
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">使用地点：</td>
+        <td>{{useaddress}}</td>
+        <td class="text-right">租赁合同号：</td>
+        <td>
+            {{leasecontractno}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-center" colspan="4">CPU:<span class="text-red">{{cpu}}</span>&nbsp;内存：<span class="text-red">{{memory}}</span>&nbsp;硬盘:<span class="text-red">{{harddisk}}</span></td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a id="auditnewdevice-form-btnpass" href="" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px;">审核通过</a>
+            &nbsp;
+            <a id="auditnewdevice-form-btnreject" href="" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" style="width:100px;">审核退回</a>
+            &nbsp;
+            <a id="auditnewdevice-form-btnremove" href="" class="easyui-linkbutton" data-options="iconCls:'icon-newremove'" style="width:100px;">审核删除</a>
+        </td>
+    </tr>
+</table>

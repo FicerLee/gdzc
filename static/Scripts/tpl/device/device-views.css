@@ -1,0 +1,7 @@
+﻿#device-views-view table{
+    width:100%;
+}
+#device-views-view td{
+    padding:3px;
+    border:1px solid #9bbef6;
+}

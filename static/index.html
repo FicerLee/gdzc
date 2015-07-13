@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>DFAC信息类设备管理系统</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link href="Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="Content/themes/icon.css" rel="stylesheet" />
+    <link href="Content/style.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.11.1.min.js"></script>
+    <script src="Scripts/js.cookie.js"></script>
+    <script src="Scripts/jquery.easyui-1.4.2.js"></script>
+    <script src="Scripts/locale/easyui-lang-zh_CN.js"></script>
+    <script src="Scripts/sea.js"></script>
+    <script src="Scripts/seajs-text.js"></script>
+    <script src="Scripts/seajs-css.js"></script>
+    <script src="Scripts/date-zh-CN.js"></script>
+    <script src="Scripts/mustache.js"></script>
+    <script src="Scripts/json2.js"></script>
+    <script src="Scripts/ueditor/ueditor.config.js"></script>
+    <script src="Scripts/ueditor/ueditor.all.min.js"></script>
+    <script src="Scripts/jquery.form.js"></script>
+    <script src="Scripts/linq.min.js"></script>
+    <script src="Scripts/md5.js"></script>
+    <script src="Scripts/Utility.js"></script>
+
+    <!--<script src="Scripts/easyui-extend.js"></script>-->
+    <style>
+        #tabs {
+            padding: 5px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',height:80">
+        <!--放置首页-->
+        <div id="topcontainer">
+            <div id="home-logo">
+                <h1>DFAC信息类设备管理系统</h1>
+            </div>
+            <div id="home-userinfo">
+                <!--获取用户信息-->
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'south',height:50">
+        <!--放置页脚-->
+        <div class="footer">
+            <p class="text-center">&copy;东风襄阳物流工贸有限公司2014-2015</p>
+        </div>
+    </div>
+    <div data-options="region:'west',title:'功能导航',split:true,width:220">
+        <!--功能导航-->
+        <ul id="navmenu"></ul>
+    </div>
+    <div data-options="region:'center'" style="overflow:hidden;">
+        <!--主功能区-->
+        <div class="easyui-tabs" data-options="fit:true,border:false,plain:true" id="tabs" style="overflow:hidden;">
+            <!--点击链接后到各个子页面-->
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $(document).bind('contextmenu', function (e) {
+                e.preventDefault();
+            })
+            seajs.config({
+                debug: 1
+            });
+            seajs.use('app/app', function (app) {
+                app.init('#tabs');
+            });
+        });
+    </script>
+</body>
+</html>

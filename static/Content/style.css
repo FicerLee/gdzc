@@ -1,0 +1,284 @@
+﻿@import "navmenu.css";
+@import "changepassword.css";
+@import "modifyprofile.css";
+body {
+    font-size:14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:link {
+        color: #333;
+    }
+
+    a:visited {
+        color: #333;
+    }
+
+    a:hover {
+        color: red;
+    }
+
+    a:active {
+    }
+
+.textbox {
+    height: 20px;
+    margin: 0;
+    padding: 0 2px;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.tabcontainer{
+    height:100%;
+    overflow:hidden;
+}
+.clear{
+    clear:both;
+}
+
+.text-center {
+    text-align: center;
+}
+.text-right{
+    text-align:right;
+}
+.text-top{
+    vertical-align:top;
+}
+.text-del{
+    text-decoration:line-through;
+}
+.text-red{
+    color:#e40707;
+}
+.text-bold{
+    font-weight:bold;
+}
+.text-addnew{
+    padding-left:16px;
+    background:url('images/add.gif') left center no-repeat;
+}
+.text-update{
+    padding-left:16px;
+    background:url('images/reset.png') left center no-repeat;
+}
+.text-new{
+    background:url('images/anew.gif') left center no-repeat;
+}
+.text-pass{
+    background:url('images/tick.png') no-repeat;
+    background-position:10px center;
+}
+.text-reject{
+    background:url('images/remove.gif') no-repeat;
+    background-position:10px center;
+}
+.text-ok{
+    background:url('images/accept.png') no-repeat;
+    background-position:10px center;
+}
+.text-err{
+    background:url('images/error.gif') no-repeat;
+    background-position:10px center;
+}
+.text-modify{
+    background:url('images/update_available.png') no-repeat;
+    background-position:10px center;
+}
+
+.warning{
+    background:#ffd800;
+    color:red;
+    padding:5px;
+}
+
+.chkBox {
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-bottom: 1px;
+}
+
+.toolbar {
+    padding:2px 0 3px 5px;
+}
+  .toolbar ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+  }
+    .toolbar ul li{
+        float:left;
+        height:28px;
+        line-height:32px;
+        margin-right:10px;
+    }
+    
+
+.footer {
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+/*首页顶部*/
+#topcontainer {
+    position: relative;
+}
+
+#home-logo {
+    position: absolute;
+    background: url("images/logo.png") no-repeat center center;
+    width: 400px;
+    height: 60px;
+}
+
+    #home-logo h1 {
+        text-indent: -9999px;
+    }
+
+#home-userinfo {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+    #home-userinfo ul {
+        list-style: none;
+    }
+
+        #home-userinfo ul li {
+            float: left;
+            line-height: 24px;
+            height: 24px;
+            display: block;
+            padding-left: 30px;
+            margin-right: 20px;
+        }
+
+
+/*图标*/
+.icon-newadd {
+    background: url("images/add.png") no-repeat center center;
+}
+
+.icon-newedit {
+    background: url("images/table_edit.png") no-repeat center center;
+}
+
+.icon-newremove {
+    background: url("images/remove.gif") no-repeat center center;
+}
+.icon-login{
+    background: url("images/login16.png") no-repeat center center;
+}
+.icon-reset{
+    background: url("images/reset.png") no-repeat center center;
+}
+.icon-export{
+    background: url("images/report_excel.png") no-repeat center center;
+}
+.icon-import{
+    background: url("images/file_xls.png") no-repeat center center;
+}
+.icon-accept{
+    background: url("images/accept.png") no-repeat center center;
+}
+.icon-submit{
+    background: url("images/form_submit.png") no-repeat center center;
+}
+.icon-view{
+    background: url("images/view_list.png") no-repeat center center;
+}
+.icon-message{
+    background: url("images/mail.png") no-repeat center center;
+}
+.icon-refresh{
+    background: url("images/refresh.png") no-repeat center center;
+}
+.icon-device{
+    background: url("images/computer.png") no-repeat center center;
+}
+.icon-download{
+    background:url('images/browser_download.png') no-repeat center center;
+}
+.icon-selectall{
+    background:url('images/table_select_all.png') center center no-repeat;
+}
+.icon-unselectall{
+    background:url('images/border_all.png') center center no-repeat;
+}
+
+
+/*用户信息面板*/
+.user-info {
+    background: url('images/user_info.png') no-repeat 0 0;
+}
+
+.user-login {
+    background: url('images/login.png') no-repeat 0 0;
+}
+
+.user-logout {
+    background: url('images/exit.png') no-repeat 0 0;
+}
+
+/*用户登录*/
+#user-login table{
+    width:300px;
+    margin:0 auto;
+}
+#user-login table td {
+    padding: 5px;
+}
+
+/*checkbox样式*/
+input[type=checkbox].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+    input[type=checkbox].css-checkbox + label.css-label {
+        padding-left: 17px;
+        height: 12px;
+        display: inline-block;
+        line-height: 12px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        font-size: 12px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    input[type=checkbox].css-checkbox:checked + label.css-label {
+        background-position: 0 -12px;
+    }
+
+label.css-label {
+    background-image: url('images/csscheckbox.png');
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*用户模板*/
+.table-form{
+    width:100%;
+}
+ .table-form td{
+     border:1px solid #e0e0e0;
+     padding:3px;
+ }
+

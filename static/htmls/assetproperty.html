@@ -1,0 +1,13 @@
+﻿<div id="assetproperty" class="tabcontainer">
+    <table id="assetproperty-grid"></table>
+</div>
+<div id="assetproperty-toolbar">
+    <div class="toolbar">
+        <a id="assetproperty-btnadd" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newadd'">新增资产属性</a>
+    </div>
+</div>
+<script>
+    seajs.use('app/app.assetproperty', function (assetproperty) {
+        assetproperty.init('#assetproperty-grid');
+    });
+</script>

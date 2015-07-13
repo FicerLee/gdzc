@@ -1,0 +1,24 @@
+﻿<table id="investplan-view">
+    <tr>
+        <td class="text-center">
+            投资年份:
+            <span class="text-bold text-red">
+                {{year}}
+            </span>
+            年
+        </td>
+    </tr>
+    <tr>
+        <td style="height:400px;">
+            <table id="investplan-view-grid"></table>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-center">
+            {{#enablesubmit}}
+            <a href="" class="easyui-linkbutton" id="investplan-view-btnsubmit" style="width:100px;" data-options="iconCls:'icon-submit'">提交计划</a>
+            {{/enablesubmit}}&nbsp;&nbsp;
+            <a href="" class="easyui-linkbutton" id="investplan-view-btnexport" style="width:130px;" data-options="iconCls:'icon-export'">导出投资计划明细</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,12 @@
+﻿#profile{
+    width:100%;
+}
+.profile-panel{
+    margin:0 auto;
+    margin-top:20px;
+}
+#profile td{
+    padding:3px;
+    border:1px solid #e0e0e0;
+    width:auto;
+}

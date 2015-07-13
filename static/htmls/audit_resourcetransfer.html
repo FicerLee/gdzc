@@ -1,0 +1,51 @@
+﻿
+<div id="auditresourcetransfer" class="tabcontainer">
+    <table id="auditresourcetransfer-grid"></table>
+</div>
+<div id="auditresourcetransfer-toolbar">
+    <div class="toolbar">
+        <a id="auditresourcetransfer-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出申请记录</a>
+    </div>
+    <div style="clear:both"></div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <span>关键词:</span>
+                <input type="text" value="" id="auditresourcetransfer-key" class="easyui-textbox" />
+            </li>
+            <li>
+                <span>设备类型:</span>
+                <input type="text" value="" id="auditresourcetransfer-category-combo" />
+            </li>
+            <li>
+                <span>单位部门:</span>
+                <input type="text" value="" id="auditresourcetransfer-company-combo" />
+            </li>
+            <li>
+                <span>审核状态:</span>
+                <input type="text" value="" id="auditresourcetransfer-auditstatus-combo" />
+            </li>
+            <li>
+                <span>申请时间:</span>
+                <input type="text" value="" id="auditresourcetransfer-startdate" class="easyui-datebox" data-options="editable:false,width:100" />
+                <input type="text" value="" id="auditresourcetransfer-enddate" class="easyui-datebox" data-options="editable:false,width:100" />
+            </li>
+            <li><a id="auditresourcetransfer-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a></li>
+        </ul>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<div id="auditresourcetransfer-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'auditresourcetransfer-showDeviceInfo'">查看设备详细信息...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'auditresourcetransfer-showSumitdeviceuse',iconCls:'icon-redo'">再次提交审核</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'auditresourcetransfer-doPass',iconCls:'icon-ok'">审核通过</div>
+    <div data-options="name:'auditresourcetransfer-doReject',iconCls:'icon-undo'">审核退回</div>
+    <div data-options="name:'auditresourcetransfer-doRemove',iconCls:'icon-newremove'">审核删除</div>
+</div>
+<script>
+    seajs.use('app/app.auditresourcetransfer', function (auditresourcetransfer) {
+        auditresourcetransfer.init('#auditresourcetransfer-grid');
+    });
+</script>

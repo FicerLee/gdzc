@@ -1,0 +1,47 @@
+﻿<div id="auditinvestplan" class="tabcontainer">
+    <table id="auditinvestplan-grid"></table>
+</div>
+<div id="auditinvestplan-toolbar">
+    <div class="toolbar">
+        <a id="auditinvestplan-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出投资计划报表</a>
+    </div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <span>投资计划时间:</span>
+                <input type="text" value="" id="auditinvestplan-year" style="width:60px;"/>
+            </li>
+            <li>
+                <input type="text" value="" id="auditinvestplan-key" class="easyui-textbox" data-options="prompt:'请输入关键词...'" />
+            </li>
+            <li>
+                <input type="text" value="" id="auditinvestplan-category" />
+            </li>
+            <li>
+                <input type="text" value="" id="auditinvestplan-belong" />
+            </li>
+            <li>
+                <span>审核状态:</span>
+                <input type="text" value="" id="auditinvestplan-state" style="width:80px;" />
+                <a id="auditinvestplan-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="auditinvestplan-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'auditinvestplan-showDeviceInfo',iconCls:'icon-view'">查看更新设备明细...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'auditinvestplan-selectType',iconCls:'icon-device'">
+        <span>设备选型</span>
+    </div>
+    <div data-options="name:'auditinvestplan-selectTypeOption'">高级选型...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'auditinvestplan-doAuditdelete',iconCls:'icon-newremove'">审核删除</div>
+    <div data-options="name:'auditinvestplan-doAuditreject',iconCls:'icon-redo'">审核退回</div>
+</div>
+<script>
+    seajs.use('app/app.auditinvestplan', function (auditinvestplan) {
+        auditinvestplan.init('#auditinvestplan-grid');
+    });
+</script>

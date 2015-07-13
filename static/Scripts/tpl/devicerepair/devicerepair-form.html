@@ -1,0 +1,25 @@
+﻿<table id="devicerepair-form">
+    <tr>
+        <td style="width:120px;" class="text-right">选择设备：</td>
+        <td>
+            <input type="text" value="{{deviceid}}" id="devicerepair-form-device"  style="width:120px;" data-options="required:true"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">维修地点：</td>
+        <td>
+            <input type="text" value="{{repairplace}}" id="devicerepair-form-repairplace" style="width:160px;" class="easyui-validatebox textbox" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">维修原因：</td>
+        <td style="height:100px;" class="text-top">
+            <input type="text" value="{{memo}}" id="devicerepair-form-memo" class="easyui-textbox" data-options="multiline:true" style="height:100%;width:100%;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a id="devicerepair-form-btnsubmit" href="" class="easyui-linkbutton" data-options="iconCls:'icon-submit'" style="width:100px;">立即提交</a>
+        </td>
+    </tr>
+</table>

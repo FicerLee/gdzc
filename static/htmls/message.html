@@ -1,0 +1,29 @@
+﻿<div id="message" style="height:100%;overflow:hidden;">
+    <table id="message-grid"></table>
+</div>
+<div id="message-toolbar" class="toolbar">
+    <ul>
+        <li>
+            <input type="text" value="" id="message-key" class="easyui-textbox" data-options="prompt:'关键字'" />
+        </li>
+        <li>
+            <span>消息类型:</span>
+            <input type="text" value="" id="message-messagecategory" />
+        </li>
+        <li>
+            <label>时间范围:从</label>
+            <input type="text" value="" id="message-startdate" class="easyui-datebox" data-options="editable:false" />&nbsp;至
+            <input type="text" value="" id="message-enddate" class="easyui-datebox" data-options="editable:false" />
+        </li>
+        <li>
+            <a id="message-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<script>
+    seajs.use('app/app.message', function (message) {
+        message.init('#message-grid');
+    });
+</script>
+

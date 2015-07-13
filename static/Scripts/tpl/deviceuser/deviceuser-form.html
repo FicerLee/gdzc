@@ -1,0 +1,37 @@
+﻿<table id="deviceuser-form">
+    <tr>
+        <td style="width:120px;" class="text-right">使用人姓名：</td>
+        <td>
+            <input type="text" value="{{username}}" id="deviceuser-form-username" class="easyui-validatebox textbox" data-options="required:true" style="width:120px;" />
+        </td>
+        <td style="width:120px;" class="text-right">所属部门：</td>
+        <td>
+            <input type="text" value="{{departmentid}}" id="deviceuser-form-company" data-options="required:true"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">岗位名称：</td>
+        <td>
+            <input type="text" value="{{postname}}" id="deviceuser-form-postname" class="easyui-textbox" style="width:120px;" data-options="required:true"/>
+        </td>
+        <td class="text-right">岗位性质：</td>
+        <td>
+            <input type="text" value="{{postpropertyid}}" id="deviceuser-form-postproperty" style="width:120px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">用工性质：</td>
+        <td>
+            <input type="text" value="{{workpropertyid}}" id="deviceuser-form-workproperty" style="width:130px;" data-options="required:true" />
+        </td>
+        <td class="text-right">当前状态：</td>
+        <td>
+            <input type="text" value="{{statusid}}" id="deviceuser-form-status" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a id="deviceuser-form-btnsubmit" href="" class="easyui-linkbutton" style="width:100px;" data-options="iconCls:'icon-audit'">提交审核</a>
+        </td>
+    </tr>
+</table>

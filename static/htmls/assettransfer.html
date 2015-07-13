@@ -1,0 +1,41 @@
+﻿<div id="assettransfer" class="tabcontainer">
+    <table id="assettransfer-grid"></table>
+</div>
+<div id="assettransfer-toolbar">
+    <div class="toolbar">
+        <a id="assettransfer-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增资产转移申请</a>
+        <a id="assettransfer-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出资产转移申请</a>
+
+        <!--<a id="assettransfer-btnedit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改</a>
+        <a id="assettransfer-btnremove" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newremove',plain:true">删除</a>
+        <a id="assettransfer-btnconfirm" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-accept',plain:true">资产转移确认</a>-->
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li><input type="text" value="" id="assettransfer-key" class="easyui-textbox" data-options="prompt:'关键字'" />
+</li>
+            <li><span>从：</span>
+<input type="text" value="" id="assettransfer-from" style="width:120px;" />
+</li>
+            <li>
+                <span>：</span>
+                <input type="text" value="" id="assettransfer-to" style="width:120px;" />
+            </li>
+            <li>
+                <a id="assettransfer-btnsearch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="assettransfer-grid-contextmenu" class="easyui-menu" data-options="width:180">
+    <div data-options="name:'assettransfer-showDeviceinfo'">转移设备详细信息...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'device-showConfirmrepair'">设备转移结果确认...</div>
+</div>
+<script>
+    seajs.use('app/app.assettransfer', function (assettransfer) {
+        assettransfer.init('#assettransfer-grid');
+    });
+</script>

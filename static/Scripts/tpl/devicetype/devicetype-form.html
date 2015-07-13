@@ -1,0 +1,25 @@
+﻿<table id="devicetype-form">
+    <tr>
+        <td style="width:200px;" class="text-right">设备选型名称：</td>
+        <td>
+            <input type="text" value="{{typename}}" id="devicetype-form-typename" class="easyui-validatebox textbox" data-options="required:true" style="width:120px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">选型类型：</td>
+        <td>
+            <input type="text" value="{{categoryid}}" id="devicetype-form-categoryname" style="width:120px;"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">参考价格（单位：万元）：</td>
+        <td>
+            <input type="text" value="{{referenceprice}}" id="devicetype-form-referenceprice" class="easyui-numberbox" data-options="min:0,precision:3,prefix:'&#65509;'" style="width:80px;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-center">
+            <a href="" class="easyui-linkbutton" id="devicetype-form-btnsave" data-options="iconCls:'icon-save'" style="width:100px;">保存</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,39 @@
+﻿<div id="devicescrap" class="tabcontainer">
+    <table id="devicescrap-grid"></table>
+</div>
+<div id="devicescrap-toolbar">
+    <div class="toolbar">
+        <a id="devicescrap-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增报废申请</a>
+        <a id="devicescrap-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出报废记录</a>
+    </div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <input type="text" value="" id="devicescrap-key" class="easyui-textbox" data-options="prompt:'输入关键词'" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicescrap-category" style="width:120px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicescrap-company" />
+            </li>
+            <li>
+                <span>报废时间:</span>
+                <input type="text" value="" id="devicescrap-startdate" class="easyui-datebox" data-options="editable:false,width:100" />
+                <input type="text" value="" id="devicescrap-enddate" class="easyui-datebox" data-options="editable:false,width:100" />
+            </li>
+            <li>
+                <a id="devicescrap-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="devicescrap-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'devicescrap-showDeviceInfo'">查看设备详细信息...</div>
+</div>
+<script>
+    seajs.use('app/app.devicescrap', function (devicescrap) {
+        devicescrap.init('#devicescrap-grid');
+    });
+</script>

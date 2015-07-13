@@ -1,0 +1,347 @@
+﻿<table id="auditdeviceproperty-form">
+    <tr>
+        <td class="text-right" style="width:120px;">审核申请时间：</td>
+        <td style="width:220px;">
+            <span class="text-red">{{createddate}}</span>
+        </td>
+        <td class="text-right" style="width:120px;">审核提交人：</td>
+        <td>
+            <span class="text-red">{{creatorname}}</span>
+        </td>
+    </tr>
+    {{#values}}
+    <tr>
+        <td class="text-right">资产编码：</td>
+        <td>
+            {{#assetno}}
+            {{#ischanged}}
+            <span class="text-del">{{oldvalue}}</span>->
+            <span class="text-red">{{newvalue}}</span>
+            {{/ischanged}}
+            {{^ischanged}}
+            <span>{{oldvalue}}</span>
+            {{/ischanged}}
+            {{/assetno}}
+        </td>
+        <td class="text-right">设备型号：</td>
+        <td>
+            {{#deviceno}}
+            {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+            {{/ischanged}}
+            {{^ischanged}}
+            {{oldvalue}}
+            {{/ischanged}}
+            {{/deviceno}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">使用人：</td>
+        <td>
+            {{#deviceusername}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/deviceusername}}
+        </td>
+        <td class="text-right">使用单位：</td>
+        <td>
+            {{#companyname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{newvalue}}
+            </span>->
+            <span class="text-red">
+                {{oldvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/companyname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">所在科室：</td>
+        <td>
+            {{#departmentname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>-->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/departmentname}}
+        </td>
+        <td class="text-right">岗位性质：</td>
+        <td>
+            {{#postpropertyname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/postpropertyname}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">用工性质：</td>
+        <td>
+            {{#workpropertyname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/workpropertyname}}
+        </td>
+        <td class="text-right">是否维修：</td>
+        <td>
+            {{#isrepaired}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/isrepaired}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">设备类别：</td>
+        <td>
+            {{#categoryname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/categoryname}}
+        </td>
+        <td class="text-right">出厂编号：</td>
+        <td>
+            {{#productno}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/productno}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产类型：</td>
+        <td>
+            {{#assetcategoryname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/assetcategoryname}}
+        </td>
+        <td class="text-right">使用状态：</td>
+        <td>
+            
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">启用日期：</td>
+        <td>
+            {{#enabledate}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/enabledate}}
+        </td>
+        <td class="text-right">使用年限：</td>
+        <td>
+            {{#limityears}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}年
+            </span>->
+            <span class="text-red">
+                {{newvalue}}年
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}年
+              {{/ischanged}}
+            {{/limityears}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">保期：</td>
+        <td>
+            {{#protectyears}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}年
+            </span>->
+            <span class="text-red">
+                {{newvalue}}年
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}年
+              {{/ischanged}}
+            {{/protectyears}}
+        </td>
+        <td class="text-right">租赁合同：</td>
+        <td>
+            {{#leasecontractno}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/leasecontractno}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">使用地点：</td>
+        <td>
+            {{#useaddress}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/useaddress}}
+        </td>
+        <td class="text-right">资产原值：</td>
+        <td>
+            {{#assetoriginalvalue}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}万元
+            </span>->
+            <span class="text-red">
+                {{newvalue}}万元
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}万元
+              {{/ischanged}}
+            {{/assetoriginalvalue}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">资产属性：</td>
+        <td>
+            {{#assetpropertyname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/assetpropertyname}}
+        </td>
+        <td class="text-right">资产归属：</td>
+        <td>
+            {{#assetbelongname}}
+              {{#ischanged}}
+            <span class="text-del">
+                {{oldvalue}}
+            </span>->
+            <span class="text-red">
+                {{newvalue}}
+            </span>
+              {{/ischanged}}
+              {{^ischanged}}
+                {{oldvalue}}
+              {{/ischanged}}
+            {{/assetbelongname}}
+        </td>
+    </tr>
+    {{/values}}
+    <tr>
+        <td colspan="4" class="text-center">
+            <a href="" class="easyui-linkbutton" id="auditdeviceproperty-form-btnsubmit" style="width:100px;" data-options="iconCls:'icon-ok'">审核通过</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdeviceproperty-form-btnreject" style="width:100px;" data-options="iconCls:'icon-undo'">审核退回</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdeviceproperty-form-btnremove" style="width:100px;" data-options="iconCls:'icon-newremove'">审核删除</a>&nbsp;
+            <a href="" class="easyui-linkbutton" id="auditdeviceproperty-form-btnresubmit" style="width:100px;" data-options="iconCls:'icon-redo'">再次提交</a>
+
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,115 @@
+﻿<div id="device-views">
+    <div id="device-views-view" class="easyui-accordion" data-options="fit:true,border:false" style="width:100%;height:100%;">
+        {{#rows}}
+        <div title="设备型号：{{categoryname}}-{{deviceno}}" data-options="iconCls:'icon-ok',selected:true" style="overflow:auto;padding:10px;">
+            <table>
+                <tr>
+                    <td style="width:100px;" class="text-right">资产编码：</td>
+                    <td style="width:120px;">{{assetno}}</td>
+                    <td style="width:100px;" class="text-right">使用人：</td>
+                    <td style="width:120px;">{{username}}</td>
+                    <td style="width:100px;" class="text-right">单位：</td>
+                    <td>{{companyname}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right">科室：</td>
+                    <td>
+                        {{departmentname}}
+                    </td>
+                    <td class="text-right">岗位性质：</td>
+                    <td>
+                        {{postpropertyname}}
+                    </td>
+                    <td class="text-right">用工性质：</td>
+                    <td>
+                        {{workpropertyname}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">设备类别：</td>
+                    <td>
+                        {{categoryname}}
+                    </td>
+                    <td class="text-right">设备型号：</td>
+                    <td>
+                        {{deviceno}}
+                    </td>
+                    <td class="text-right">出厂编号：</td>
+                    <td>
+                        {{productno}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">资产类型：</td>
+                    <td>
+                        {{assetcategoryname}}
+                    </td>
+                    <td class="text-right">使用状态：</td>
+                    <td>
+                        {{status}}
+                    </td>
+                    <td class="text-right">启用日期：</td>
+                    <td>
+                        {{enabledate}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">使用年限：</td>
+                    <td>
+                        {{limityears}}年
+                    </td>
+                    <td class="text-right">保期：</td>
+                    <td>
+                        {{protectyears}}年
+                    </td>
+                    <td class="text-right">租赁合同：</td>
+                    <td>
+                        {{leasecontractno}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">使用地点：</td>
+                    <td>
+                        {{useaddress}}
+                    </td>
+                    <td class="text-right">资产原值：</td>
+                    <td>
+                        {{assetoriginalvalue}}&nbsp;万元
+                    </td>
+                    <td class="text-right">资产属性：</td>
+                    <td>
+                        {{assetpropertyname}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">资产归属：</td>
+                    <td>
+                        {{assetbelongname}}
+                    </td>
+                    <td class="text-right">录入人：</td>
+                    <td>
+                        {{createdusername}}
+                    </td>
+                    <td class="text-right">录入日期：</td>
+                    <td>{{createddate}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right">CPU：</td>
+                    <td>{{cpu}}</td>
+                    <td class="text-right">内存：</td>
+                    <td>{{memory}}</td>
+                    <td class="text-right">硬盘：</td>
+                    <td>{{harddisk}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right">备注说明：</td>
+                    <td colspan="5">
+                        {{memo}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {{/rows}}
+    </div>
+
+</div>

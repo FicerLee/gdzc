@@ -1,0 +1,15 @@
+﻿#modifyprofile{
+}
+
+.modifyprofilepanel{
+    margin: 0 auto;
+    margin-top:20px;
+}
+#modifyprofile table{
+    margin:0 auto;
+    width:250px;
+    margin-top:20px;
+}
+#modifyprofile table td{
+    padding:5px;
+}

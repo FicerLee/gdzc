@@ -1,0 +1,51 @@
+﻿
+<div id="auditremovedevice" class="tabcontainer">
+    <table id="auditremovedevice-grid"></table>
+</div>
+<div id="auditremovedevice-toolbar">
+    <div class="toolbar">
+        <a id="auditremovedevice-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增删除设备申请</a>
+        <a id="auditremovedevice-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出设备删除申请记录</a>
+    </div>
+    <div style="clear:both"></div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <span>关键词:</span>
+                <input type="text" value="" id="auditremovedevice-key" class="easyui-textbox" />
+            </li>
+            <li>
+                <span>设备类型:</span>
+                <input type="text" value="" id="auditremovedevice-category-combo" />
+            </li>
+            <li>
+                <span>单位部门:</span>
+                <input type="text" value="" id="auditremovedevice-company-combo" />
+            </li>
+            <li>
+                <span>审核状态:</span>
+                <input type="text" value="" id="auditremovedevice-auditstatus-combo" />
+            </li>
+            <li>
+                <span>申请时间:</span>
+                <input type="text" value="" id="auditremovedevice-startdate" class="easyui-datebox" data-options="editable:false,width:100" />
+                <input type="text" value="" id="auditremovedevice-enddate" class="easyui-datebox" data-options="editable:false,width:100" />
+            </li>
+            <li><a id="auditremovedevice-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a></li>
+        </ul>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<div id="auditremovedevice-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'auditremovedevice-showDeviceInfo'">查看设备详细信息...</div>
+    <div class="menu-sep"></div>
+    <div data-options="name:'auditremovedevice-showSumitdeviceuse',iconCls:'icon-redo'">再次提交设备删除申请...</div>
+    <div data-options="name:'auditremovedevice-doPass',iconCls:'icon-ok'">审核通过</div>
+    <div data-options="name:'auditremovedevice-doReject',iconCls:'icon-undo'">审核退回</div>
+    <div data-options="name:'auditremovedevice-doRemove',iconCls:'icon-newremove'">审核删除</div>
+</div>
+<script>
+    seajs.use('app/app.auditremovedevice', function (auditremovedevice) {
+        auditremovedevice.init('#auditremovedevice-grid');
+    });
+</script>

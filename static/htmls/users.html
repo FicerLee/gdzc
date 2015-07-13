@@ -1,0 +1,32 @@
+﻿<div id="users" class="tabcontainer">
+    <table id="users-grid"></table>
+</div>
+<div id="users-toolbar">
+    <div class="toolbar">
+        <a id="users-btnadd" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newadd'">新增</a>
+        <a id="users-btnedit" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newedit'">修改</a>
+        <a id="users-btnremove" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-newremove'">删除</a>
+    </div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <input type="text" value="" id="users-key" class="easyui-textbox" data-options="prompt:'请输入关键词'" />
+            </li>
+            <li>
+                <input type="text" value="" id="users-company" style="width:160px;"/>
+            </li>
+            <li>
+                <a id="users-btnsearch" href="" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">查询</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="users-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'users-showEdit',iconCls:'icon-newedit'">更改用户信息...</div>
+</div>
+<script>
+    seajs.use('app/app.users', function (users) {
+        users.init('#users-grid');
+    });
+</script>

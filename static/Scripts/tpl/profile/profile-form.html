@@ -1,0 +1,25 @@
+﻿<table id="profile-form">
+    <tr>
+        <td style="width:180px;" class="text-right">登录账号:</td>
+        <td>
+            <span class="text-red">{{usercode}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">密码:</td>
+        <td><input id="profile-pwd" type="password" class="easyui-validatebox textbox" data-options="required:true" /></td>
+    </tr>
+    <tr>
+        <td class="text-right">用户名:</td>
+        <td><input id="profile-username" value="{{username}}" type="text" class="easyui-validatebox textbox" data-options="required:true" /></td>
+    </tr>
+    <tr>
+        <td class="text-right">联系方式:</td>
+        <td><input id="profile-contact" value="{{contactphone}}" type="text" class="easyui-validatebox textbox" data-options="required:true" /></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text-right">
+            <a href="#" class="easyui-linkbutton" id="profile-btnsave" data-options="iconCls:'icon-ok',width:100">修改</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,31 @@
+﻿<table id="auditinvestplan-selecttype" style="width:100%;">
+    <tr>
+        <td class="text-right" style="width:120px;">审核结论：</td>
+        <td style="width:100px;">
+            <input type="text" value="" id="auditinvestplan-selecttype-state" style="width:80px;" data-options="required:true" />
+        </td>
+        <td style="width:100px;" class="text-right">设备选型：</td>
+        <td>
+            <input type="text" value="" id="auditinvestplan-selecttype-type" style="width:180px;" data-options="required:true" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">审核内容：</td>
+        <td colspan="3">
+            <input type="text" value="{{auditcontent}}" id="auditinvestplan-selecttype-auditcontent" class="easyui-textbox" style="width:100%;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right text-top">备注说明：</td>
+        <td colspan="3" class="text-top" style="height:50px;">
+            <input type="text" value="{{memo}}" id="auditinvestplan-selecttype-memo" class="easyui-textbox" data-options="multiline:true" style="width:100%;height:100%;" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-center">
+            <a href="" id="auditinvestplan-selecttype-btnsave" class="easyui-linkbutton" style="width:100px;" data-options="iconCls:'icon-ok'">
+                确定
+            </a>
+        </td>
+    </tr>
+</table>

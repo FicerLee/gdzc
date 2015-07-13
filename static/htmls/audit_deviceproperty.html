@@ -1,0 +1,46 @@
+﻿
+<div id="auditdeviceproperty" class="tabcontainer">
+    <table id="auditdeviceproperty-grid"></table>
+</div>
+<div id="auditdeviceproperty-toolbar">
+    <div class="toolbar">
+        <a id="auditdeviceproperty-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出申请记录</a>
+    </div>
+    <div style="clear:both"></div>
+    <div class="toolbar">
+        <ul>
+            <li>
+                <input type="text" value="" id="auditdeviceproperty-key" class="easyui-textbox" data-options="prompt:'输入关键字'"/>
+            </li>
+            <li>
+                <input type="text" value="" id="auditdeviceproperty-category" style="width:120px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="auditdeviceproperty-company" style="width:120px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="auditdeviceproperty-auditstatus" style="width:80px;" />
+            </li>
+            <li>
+                <span>申请时间:</span>
+                <input type="text" value="" id="auditdeviceproperty-startdate" class="easyui-datebox" data-options="editable:false,width:100" />
+                <input type="text" value="" id="auditdeviceproperty-enddate" class="easyui-datebox" data-options="editable:false,width:100" />
+            </li>
+            <li><a id="auditdeviceproperty-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a></li>
+        </ul>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<div id="auditdeviceproperty-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'auditdeviceproperty-showAuditInfo',iconCls:'icon-audit'">查看设备属性变更审核详细信息...</div>
+    <div data-options="name:'auditdeviceproperty-showDeviceInfo',iconCls:'icon-device'">查看设备详细信息...</div>
+    <div data-options="name:'auditdeviceproperty-doReSubmit',iconCls:'icon-redo'">再次提交审核</div>
+    <div data-options="name:'auditdeviceproperty-doPass',iconCls:'icon-ok'">审核通过</div>
+    <div data-options="name:'auditdeviceproperty-doReject',iconCls:'icon-undo'">审核退回</div>
+    <div data-options="name:'auditdeviceproperty-doRemove',iconCls:'icon-newremove'">审核删除</div>
+</div>
+<script>
+    seajs.use('app/app.auditdeviceproperty', function (auditdeviceproperty) {
+        auditdeviceproperty.init('#auditdeviceproperty-grid');
+    });
+</script>

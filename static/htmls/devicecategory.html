@@ -1,0 +1,18 @@
+﻿<div id="devicecategory" class="tabcontainer">
+    <table id="devicecategory-grid"></table>
+</div>
+<div id="devicecategory-toolbar">
+    <div class="toolbar">
+        <a id="devicecategory-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增设备类型</a>
+        <a id="devicecategory-btnedit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改设备类型</a>
+        <a id="devicecategory-btnremove" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newremove',plain:true">删除设备类型</a>
+    </div>
+</div>
+<div id="devicecategory-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'devicecategory-showDeviceInfo'">查看历史参考价格...</div>
+</div>
+<script>
+    seajs.use('app/app.devicecategory', function (devicecategory) {
+        devicecategory.init('#devicecategory-grid');
+    });
+</script>

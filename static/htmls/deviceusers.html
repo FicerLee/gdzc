@@ -1,0 +1,30 @@
+﻿<div id="deviceuser" class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'west',width:200,split:true,title:'公司及部门'">
+        <!--左边放置公司筛选-->
+        <ul id="deviceuser-company"></ul>
+    </div>
+    <div data-options="region:'center'">
+        <table id="deviceuser-grid"></table>
+    </div>
+</div>
+<div id="deviceuser-toolbar">
+    <div class="toolbar">
+        <a id="deviceuser-btnadd" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增</a>
+        <a id="deviceuser-btnedit" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改</a>
+        <a id="deviceuser-btnremove" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-newremove',plain:true">删除</a>
+        <a href="javascript:void(0);" class="easyui-linkbutton" id="deviceuser-btnexport" data-options="iconCls:'icon-export',plain:true">导出</a>
+    </div>
+    <div class="toolbar">
+        <input type="text" value="" id="deviceuser-key" class="easyui-textbox" data-options="prompt:'请输入关键词'" />
+        <a href="" class="easyui-linkbutton" id="deviceuser-btnsearch" data-options="iconCls:'icon-search',plain:true">搜索</a>
+    </div>
+</div>
+<div id="deviceuser-contextmenu" class="easyui-menu">
+    <div data-options="name:'deviceuser-showDeviceInfo',iconCls:'icon-device'">查看该使用人当前设备信息...</div>
+    <div data-options="name:'deviceuser-showUserInfo',iconCls:'icon-user'">查看设备使用人信息...</div>
+</div>
+<script>
+    seajs.use('app/app.deviceuser', function (deviceuser) {
+        deviceuser.init('#deviceuser-grid');
+    });
+</script>

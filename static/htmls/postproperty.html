@@ -1,0 +1,17 @@
+﻿<div id="postproperty" class="tabcontainer">
+    <table id="postproperty-grid"></table>
+</div>
+<div id="postproperty-toolbar">
+    <a href="#" id="postproperty-btnadd" data-options="plain:true,iconCls:'icon-newadd'" class="easyui-linkbutton">新增岗位属性</a>
+</div>
+<div id="postproperty-contextmenu" class="easyui-menu">
+    <div data-options="iconCls:'icon-newadd',name:'postproperty-doAdd'">新增岗位属性...</div>
+    <div data-options="iconCls:'icon-newedit',name:'postproperty-doEdit'">修改岗位属性...</div>
+    <div data-options="iconCls:'icon-newremove',name:'postproperty-doRemove'">删除岗位属性</div>
+</div>
+<script>
+    seajs.use('app/app.postproperty', function (postproperty) {
+        postproperty.init('#postproperty-grid');
+    });
+</script>
+
