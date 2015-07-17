@@ -67,3 +67,5 @@
 /// <reference path="ueditor/ueditor.parse.js" />
 /// <reference path="ueditor/lang/zh-cn/zh-cn.js" />
 /// <reference path="uploadify/jquery.uploadify.min.js" />
+/// <reference path="app/app.device.import.js" />
+/// <reference path="app/app.device.view.js" />

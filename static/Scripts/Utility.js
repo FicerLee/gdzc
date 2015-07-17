@@ -42,56 +42,39 @@
         if (r != null) return unescape(r[2]); return null;
     };
     getData = function (args) {
-        //var data = null;
-        //$.ajax({
-        //    url: serverUrl + args.path,
-        //    data: args.data,
-        //    type: 'POST',
-        //    dataType: 'json',
-        //    async: false,
-        //    beforeSend: function (xhr) {
-        //        $.messager.progress({
-        //            msg: '正从服务器获取数据，请稍候...'
-        //        });
-        //    },
-        //    success: function (res, ts, jqXHR) {
-        //        data = res;
-        //    },
-        //    statusCode:{
-        //        401:function(){
-        //            $.messager.alert('权限错误','此操作未经授权','error');
-        //        }
-        //    },
-        //    complete: function (xhr, ts) {
-        //        $.messager.progress('close');
-        //    }
-        //});
-        //return data;
         var data = null;
-        $.messager.progress({
-            msg: '正从服务器获取数据，请稍候...'
-        });
         $.ajax({
             url: serverUrl + args.path,
             data: args.data,
             type: 'POST',
             dataType: 'json',
             async: false,
+            beforeSend: function (xhr) {
+                $.messager.progress({
+                    msg: '正从服务器获取数据，请稍候...'
+                });
+            },
+            success: function (res, ts, jqXHR) {
+                data = res;
+            },
             statusCode: {
                 401: function () {
                     $.messager.alert('权限错误', '此操作未经授权', 'error');
                 }
             },
-        }).done(function (res) {
-            return res;
-        }).fail(function (message) {
-            return null;
-        }).always(function () {
-            $.messager.progress('close');
+            complete: function (xhr, ts) {
+                $.messager.progress('close');
+            }
         });
+        return data;
+
     }
+    /*保存数据到服务器,返回一个Deferred对象
+     * path:服务器路径
+     * params:提交参数
+     */
     saveData = function (data) {
-        $.ajax({
+        return $.ajax({
             async: false,
             url: serverUrl + data.path,
             data: data.params,

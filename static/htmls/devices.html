@@ -1,21 +1,5 @@
-﻿<div id="device" class="easyui-layout" data-options="fit:true,border:false">
-    <div data-options="region:'west',width:200,split:true">
-        <!--左边放置公司筛选-->
-        <div class="easyui-accordion" data-options="fit:true,animate:false,border:false">
-            <div title="公司及部门">
-                <ul id="device-company"></ul>
-            </div>
-            <div title="设备类别">
-                <ul id="device-devicecategory"></ul>
-            </div>
-            <div title="资产属性">
-                <ul id="device-assetproperty"></ul>
-            </div>
-        </div>
-    </div>
-    <div data-options="region:'center'">
-        <table id="device-grid"></table>
-    </div>
+﻿<div id="device" class="tabcontainer">
+    <table id="device-grid"></table>
 </div>
 <div id="device-toolbar">
     <div class="toolbar">
@@ -26,17 +10,25 @@
         <a id="device-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出设备总清单</a>
     </div>
     <div class="toolbar">
+        <div class="clear"></div>
         <ul>
             <li>
                 <input type="text" value="" id="device-key" class="easyui-textbox" data-options="prompt:'关键词'" />
             </li>
             <li>
-                <span>用工性质：</span>
-                <input type="text" value="" id="device-workproperty" style="width:120px;" />
+               设备归属：<input type="text" value="" id="device-belong" style="width:120px;" />
             </li>
             <li>
-                <span>岗位性质：</span>
-                <input type="text" value="" id="device-postproperty" style="width:140px;" />
+                设备类别：
+                <input type="text" value="" id="device-category" style="width:120px;"/>
+            </li>
+            <li>
+                资产类型：
+                <input type="text" value="" id="device-assetcategory" style="width:120px;" />
+            </li>
+            <li>
+                设备状态：
+                <input type="text" value="" id="device-status" style="width:100px;" />
             </li>
             <li>
                 <a id="device-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>

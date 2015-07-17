@@ -226,7 +226,8 @@
             lines: true,
             url: Utility.serverUrl + 'devicecategory/gettree',
             method: 'post',
-            width: 120,
+            panelMinWidth:160,
+            panelWidth:'auto',
             panelHeight: 'auto',
             prompt: '选择设备类型'
         });
