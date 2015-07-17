@@ -42,31 +42,53 @@
         if (r != null) return unescape(r[2]); return null;
     };
     getData = function (args) {
+        //var data = null;
+        //$.ajax({
+        //    url: serverUrl + args.path,
+        //    data: args.data,
+        //    type: 'POST',
+        //    dataType: 'json',
+        //    async: false,
+        //    beforeSend: function (xhr) {
+        //        $.messager.progress({
+        //            msg: '正从服务器获取数据，请稍候...'
+        //        });
+        //    },
+        //    success: function (res, ts, jqXHR) {
+        //        data = res;
+        //    },
+        //    statusCode:{
+        //        401:function(){
+        //            $.messager.alert('权限错误','此操作未经授权','error');
+        //        }
+        //    },
+        //    complete: function (xhr, ts) {
+        //        $.messager.progress('close');
+        //    }
+        //});
+        //return data;
         var data = null;
+        $.messager.progress({
+            msg: '正从服务器获取数据，请稍候...'
+        });
         $.ajax({
             url: serverUrl + args.path,
             data: args.data,
             type: 'POST',
             dataType: 'json',
             async: false,
-            beforeSend: function (xhr) {
-                $.messager.progress({
-                    msg: '正从服务器获取数据，请稍候...'
-                });
-            },
-            success: function (res, ts, jqXHR) {
-                data = res;
-            },
-            statusCode:{
-                401:function(){
-                    $.messager.alert('权限错误','此操作未经授权','error');
+            statusCode: {
+                401: function () {
+                    $.messager.alert('权限错误', '此操作未经授权', 'error');
                 }
             },
-            complete: function (xhr, ts) {
-                $.messager.progress('close');
-            }
+        }).done(function (res) {
+            return res;
+        }).fail(function (message) {
+            return null;
+        }).always(function () {
+            $.messager.progress('close');
         });
-        return data;
     }
     saveData = function (data) {
         $.ajax({
@@ -112,6 +134,6 @@
         saveData: saveData,
         pageList: pageList,
         crypto: crypto,
-        auditstatusStyle:auditstatusStyle
+        auditstatusStyle: auditstatusStyle
     }
 })();

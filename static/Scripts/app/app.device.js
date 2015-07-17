@@ -664,7 +664,7 @@
                     sortable: true
                 }, {
                     title: '使用状态',
-                    field: 'status',
+                    field: 'statusname',
                     width: 60,
                     sortable: true
                 }, {
@@ -1052,11 +1052,29 @@
             });
             Utility.saveData({
                 path: 'device/saveimport',
-                params:{
-                    '':data
+                params: {
+                    values:data
                 },
                 success: function (res) {
-                    console.log(res);
+                    var messages = $.parseJSON(res.message) || [];
+                    if (messages.length <= 0)
+                    {
+                        $.messager.alert('成功', '数据全部导入成功', 'info');
+                        /*关掉导入框*/
+                        $('#device-import').dialog('close');
+                    } else {
+                        $.messager.alert('警告', '存在未导入成功的数据,请修正后再次导入', 'info');
+                    }
+                    $(grid).datagrid('loadData', res);
+                    $.each(messages, function (index, value) {
+                        console.log(value);
+                        $(grid).datagrid('updateRow', {
+                            index: index,
+                            row: {
+                                message: value.message
+                            }
+                        });
+                    });
                 },
                 error: function (message) {
                     $.messager.alert('错误', message, 'warning');
@@ -1118,7 +1136,7 @@
                             assetbelongname: $(container + '-belong').combobox('getText'),
                             ispublic: $(container + '-ispublic').is('checked'),
                             isrepaired: $(container + '-isrepaired').is('checked'),
-                            deviceusername: $(container + '-deviceuser'),
+                            deviceusername: $(container + '-deviceuser').val(),
                             companyid: $(container + '-company').combobox('getValue'),
                             companyname: $(container + '-company').combobox('getText'),
                             departmentid: $(container + '-department').combotree('getValue'),
