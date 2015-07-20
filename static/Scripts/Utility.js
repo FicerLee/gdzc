@@ -9,8 +9,8 @@
         crypto,
         auditstatusStyle,
         saveData;
-    serverUrl = 'http://lgps.dfac.com/GdzcService/api/';
-    pageList = [30, 40, 50];
+    serverUrl = 'http://10.33.16.109/gdzcservice/api/';
+    pageList = [50, 80,100];
     formatDate = function (value) {
         if (!value) return '';
         var date = Date.parse(value);

@@ -1,4 +1,4 @@
-﻿<table id="device-stop">
+﻿<table id="devicestop-form" class="table-form">
     <tr>
         <td class="text-right" style="width:120px;">
             <span class="text-red">设备型号：</span>
@@ -30,7 +30,7 @@
     <tr>
         <td class="text-right"><span class="text-red">选择停用状态</span>：</td>
         <td>
-            <input type="text" value="" id="device-stop-status" />
+            <input type="text" value="" id="devicestop-form-status" />
         </td>
         <td></td>
         <td></td>
@@ -38,12 +38,7 @@
     <tr>
         <td class="text-top text-right">备注说明：</td>
         <td colspan="3" style="height:100px;" class="text-top">
-            <input type="text" value="{{auditmemo}}" id="device-stop-memo" class="easyui-textbox" data-options="multiline:true" style="width:100%;height:100%;" />
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4" class="text-center">
-            <a id="device-stop-btnsave" href="" class="easyui-linkbutton" style="width:100px;" data-options="iconCls:'icon-save'">提交审核</a>
+            <input type="text" value="{{auditmemo}}" id="devicestop-form-memo" class="easyui-textbox" data-options="multiline:true" style="width:100%;height:100%;" />
         </td>
     </tr>
 </table>

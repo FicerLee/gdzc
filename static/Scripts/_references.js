@@ -69,3 +69,5 @@
 /// <reference path="uploadify/jquery.uploadify.min.js" />
 /// <reference path="app/app.device.import.js" />
 /// <reference path="app/app.device.view.js" />
+/// <reference path="datagrid-scrollview.js" />
+/// <reference path="app/app.devicestop.js" />

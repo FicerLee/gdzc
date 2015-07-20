@@ -46,7 +46,7 @@
                     </td>
                     <td class="text-right">使用状态：</td>
                     <td>
-                        {{status}}
+                        {{statusname}}
                     </td>
                     <td class="text-right">启用日期：</td>
                     <td>
@@ -106,6 +106,28 @@
                     <td colspan="5">
                         {{memo}}
                     </td>
+                </tr>
+                <tr>
+                    <td class="text-right">是否维修？</td>
+                    <td>
+                        {{#isrepaired}}
+                        <span class="text-red text-bold">是</span>
+                        {{/isrepaired}}
+                        {{^isrepaired}}
+                            否
+                        {{/isrepaired}}
+                    </td>
+                    <td class="text-right">是否公用？</td>
+                    <td>
+                        {{#ispublic}}
+                        <span class="text-red text-bold">是</span>
+                        {{/ispublic}}
+                        {{^ispublic}}
+                        否
+                        {{/ispublic}}
+                    </td>
+                    <td class="text-right"></td>
+                    <td></td>
                 </tr>
             </table>
         </div>

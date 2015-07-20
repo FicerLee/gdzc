@@ -1,0 +1,42 @@
+﻿<div id="devicestop" class="tabcontainer">
+    <table id="devicestop-grid"></table>
+</div>
+<div id="devicestop-toolbar">
+    <div class="toolbar">
+        <a href="#" id="devicestop-btnexport" data-options="iconCls:'icon-export',plain:true" class="easyui-linkbutton">导出设备停用审核清单</a>
+    </div>
+    <div class="toolbar">
+        <div class="clear"></div>
+        <ul>
+            <li>
+                <input type="text" value="" id="devicestop-key" class="easyui-textbox" style="width:120px;" data-options="prompt:'关键字'" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicestop-belong" style="width:120px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicestop-category" style="width:120px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicestop-assetcategory" style="width:120px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="devicestop-assetproperty" style="width:120px;" />
+            </li>
+            <li>
+                审核时间段：
+                <input type="text" value="" id="devicestop-startdate" style="width:100px;" class="easyui-datebox" />：
+                <input type="text" value="" id="devicestop-enddate" style="width:100px;" class="easyui-datebox" />：
+            </li>
+            <li>
+                <a href="#" id="devicestop-btnsearch" data-options="iconCls:'icon-search',plain:true" class="easyui-linkbutton">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<script>
+    seajs.use('app/app.devicestop', function (devicestop) {
+        devicestop.init('#devicestop-grid');
+    });
+</script>

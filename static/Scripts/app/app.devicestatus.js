@@ -5,7 +5,7 @@
         getSelectedIdFromCombo;
     showComboByDeviceStop=function(container){
         $(container).combobox({
-            url: Utility.serverUrl + 'AuditDeviceStop/GetDeivceStopStatus',
+            url: Utility.serverUrl + 'AuditStopDevice/GetDeviceStopStatus',
             method: 'post',
             valueField: 'id',
             textField: 'text',

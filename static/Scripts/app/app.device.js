@@ -1,23 +1,24 @@
 ﻿define(function (require, exports, module) {
     var
+        deferred,
         $container,
         category,
         company,
         belong,
         deviceimport,
+        devicestop,
+        view,
         assetproperty,
         assetcategory,
         workproperty,
         status,
         postproperty,
         preHandlerDeviceInfo,
-        showDeviceInfo,
         showDeviceUseRecord,
         showDeviceRepairRecord,
         showDeviceUserInfo,
         showDeviceAuditRecord,
         showDeviceAssetPropertyRecord,
-        showDeviceStop,
         showDeviceAssetTransfer,
         showDeviceNewuser,
         showDeviceInfoByUser,
@@ -36,6 +37,7 @@
         reloadGrid,
         getFilter,
         init;
+    deferred = $.Deferred();
     login = require('app/app.login');
     policy = require('app/app.policy');
     category = require('app/app.devicecategory');
@@ -48,6 +50,8 @@
     postproperty = require('app/app.postproperty');
     deviceimport = require('app/app.device.import');
     fileexport = require('app/app.export');
+    view = require('app/app.device.view');
+    devicestop = require('app/app.devicestop');
     /*显示选择设备的下拉表格
      * options:
      *   queryParams:额外的查询对象
@@ -209,28 +213,6 @@
         })
 
     }
-    /*查看设备信息记录*/
-    showDeviceInfo = function (id) {
-        var data = getDataById(id);
-        if (!data) return false;
-        var _data = preHandlerDeviceInfo(data);
-        var tpl = require('tpl/device/device-view.html');
-        require('tpl/device/device-view.css');
-        var output = Mustache.render(tpl, _data);
-        $(output).dialog({
-            title: '查看设备信息',
-            width: 800,
-            height: 300,
-            modal: true,
-            onOpen: function () {
-                $.parser.parse('#device-view');
-            },
-            onClose: function () {
-                $('#device-view').dialog('destroy', true);
-            }
-        });
-
-    }
     /*查看设备使用记录*/
     showDeviceUseRecord = function (id) {
 
@@ -257,69 +239,6 @@
     showDeviceAssetChangeRecord = function (id) {
 
     }
-    /*设备停用*/
-    showDeviceStop = function (id) {
-        var data = getDataById(id);
-        if (!data) return false;
-        var tpl = require('tpl/device/device-stop.html');
-        require('tpl/device/device-stop.css');
-        data.auditmemo = '';
-        var output = Mustache.render(tpl, data);
-        $(output).dialog({
-            title: '停用设备',
-            modal: true,
-            width: 600,
-            height: 300,
-            onOpen: function () {
-                $.parser.parse('#device-stop');
-                require.async([
-                    'app/app.devicestatus'
-                ], function (status) {
-                    status.showComboByDeviceStop('#device-stop-status');
-                });
-            },
-            onClose: function () {
-                $('#device-stop').dialog('destroy', true);
-            }
-        })
-        //绑定事件
-        /*提交停用审核*/
-        $('#device-stop-btnsave').on('click', function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: Utility.serverUrl + 'AuditDeviceStop/Update',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    deviceid: data.id,
-                    statusid: $('#device-stop-status').combobox('getValue') || 0,
-                    memo: $('#device-stop-memo').val(),
-                    action: 'addnew',
-                    creatorid: (function () {
-                        var login = require('app/app.login');
-                        return login.getLocalUser().usercode;
-                    }())
-                },
-                beforeSend: function () {
-                    $.messager.progress({
-                        text: '正在更新数据，请稍候...'
-                    });
-                },
-                success: function (res, ts, jqXHR) {
-                    if (res.success) {
-                        $.messager.alert('成功', '该设备已提交停用审核', 'info');
-                        $('#device-stop').dialog('close');
-                        reloadGrid();
-                    } else {
-                        $.messager.alert('失败', res.message, 'error');
-                    }
-                },
-                complete: function (xhr) {
-                    $.messager.progress('close');
-                }
-            })
-        });
-    }
     /*设备资产转移*/
     showDeviceAssetTransfer = function (id) {
 
@@ -330,8 +249,8 @@
         if (!data) return false;
         var tpl = require('tpl/device/device-newuser.html');
         require('tpl/device/device-newuser.css');
-        if (data.status != '闲置可用') {
-            $.messager.alert('错误', '该设备当前使用状态为[' + data.status + '],必须为闲置可用才可赋予使用人', 'error');
+        if (data.statusname != '闲置可用') {
+            $.messager.alert('错误', '该设备当前使用状态为[' + data.statusname + '],必须为闲置可用才可赋予使用人', 'error');
             return false;
         }
         var _data = {
@@ -408,19 +327,22 @@
     reloadGrid = function () {
         $container.datagrid('reload');
     }
-    /*根据设备Id获取设备信息
-     * id
-     *返回值:对象
-     */
+
+    //#region 根据Id获取设备数据
     getDataById = function (id) {
         var data = Utility.getData({
             path: 'device/get',
-            params: {
+            data: {
                 id: id
             }
         });
-        return !data ? null : data.rows;
+        if (!data)
+            deferred.reject('无设备数据信息');
+        else
+            deferred.resolve(data.rows);
+        return deferred.promise();
     }
+    //#endregion
     /*显示导出*/
     showExport = function () {
         var data = {};
@@ -614,6 +536,7 @@
             }
         })
     }
+    //#region界面初始化
     init = function (container) {
         $container = $(container);
         belong.showCombo('#device-belong');
@@ -628,68 +551,56 @@
             }, {
                 field: 'assetno',
                 title: '资产编码',
-                width: 60,
                 sortable: true
             }, {
                 field: 'deviceno',
                 title: '设备型号',
-                width: 60,
                 sortable: true
             }, {
                 field: 'categoryname',
                 title: '设备类别',
-                width: 60,
                 sortable: true
             }, {
                 field: 'assetcategoryname',
                 title: '资产类型',
-                width: 60,
                 sortable: true
             }, {
                 title: '使用状态',
                 field: 'statusname',
-                width: 60,
                 sortable: true
             }, {
                 field: 'assetpropertyname',
                 title: '资产属性',
-                width: 60,
                 sortable: true
             }, {
                 field: 'assetbelongname',
                 title: '资产归属',
-                width: 60,
                 sortable: true
             }, {
                 field: 'postname',
                 title: '岗位名称',
-                width: 100
             }, {
                 field: 'postpropertyname',
                 title: '岗位性质',
-                width: 100
             }, {
                 field: 'username',
                 title: '使用人',
-                width: 100
             }, {
                 field: 'createddate',
                 title: '登记时间',
-                width: 130
             }, {
                 field: 'workpropertyname',
                 title: '用工性质',
-                width: 60
             }, {
                 field: 'useaddress',
                 title: '使用地点',
-                width: 100
             }]],
             idField: 'id',
             rownumbers: true,
             singleSelect: true,
             border: false,
-            pagination: true,
+            view: scrollview,
+            pageSize:Utility.pageList[0],
             toolbar: '#device-toolbar',
             fit: true,
             striped: true,
@@ -701,7 +612,11 @@
                     onClick: function (item) {
                         e.preventDefault();
                         if (item.name === 'device-showDeviceinfo') {
-                            showDeviceInfo(rowData.id);
+                            view.showInfo({
+                                deviceids: [rowData.id]
+                            }).fail(function (message) {
+                                $.messager.alert('警告', message, 'warning');
+                            });
                         };
                         if (item.name === 'device-showDeiveUserecord')
                             showDeviceUseRecord(rowData.id);
@@ -714,7 +629,11 @@
                         if (item.name === 'device-showAssetpropertyrecord')
                             showDeviceAssetChangeRecord(rowData.id);
                         if (item.name === 'device-showStopdevice')
-                            showDeviceStop(rowData.id);
+                        {
+                            getDataById(rowData.id).done(function (data) {
+                                devicestop.showUpdate(data);
+                            });
+                        }
                         if (item.name === 'device-showAssettransfer')
                             showDeviceAssetTransfer(rowData.id);
                         if (item.name === 'device-showNewuse')
@@ -826,23 +745,7 @@
         /*搜索*/
         $('#device-btnsearch').on('click', function (e) {
             e.preventDefault();
-            $container.datagrid('load', {
-                key: $('#device-key').val(),
-                companyid: function () {
-                    var node = $('#device-company').tree('getSelected');
-                    return node != null ? node.id : 0;
-                },
-                categoryid: function () {
-                    var node = $('#device-devicecategory').tree('getSelected');
-                    return node != null ? node.id : 0;
-                },
-                assetpropertyid: function () {
-                    var node = $('#device-assetproperty').tree('getSelected');
-                    return node != null ? node.id : 0;
-                },
-                workpropertyid: $('#device-workproperty').combobox('getValue') || 0,
-                postpropertyid: $('#device-postproperty').combotree('getValue') || 0
-            });
+            $container.datagrid('reload');
         });
 
         /*检查菜单权限*/
@@ -874,7 +777,7 @@
                 $('#device-grid-contextmenu').menu('disableItem', item.target);
         }
     }
-
+    //#endregion
     /*获取表格筛选参数
      * 
      */
@@ -889,7 +792,6 @@
     }
 
     exports.init = init;
-    exports.showDeviceInfo = showDeviceInfo;
     exports.showComboGrid = showComboGrid;
     exports.showDeviceInfoByUser = showDeviceInfoByUser;
     exports.showUpdate = showUpdate;
