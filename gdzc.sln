@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "static", "http://localhost:6759", "{1FB54BBE-1E6E-455D-9C56-16F2F9A68097}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -26,6 +26,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "static", "http://localhost:
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F92038C-281B-4CB7-8087-74FB40027E29}"
 	ProjectSection(SolutionItems) = preProject
+		WE-Palette.css = WE-Palette.css
 		WebEssentials-Settings.json = WebEssentials-Settings.json
 	EndProjectSection
 EndProject

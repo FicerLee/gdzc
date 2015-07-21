@@ -26,7 +26,6 @@
         showModifyImportData,
         showExport,
         showUpdate,
-        showComboGrid,
         closeForm,
         login,
         policy,
@@ -56,57 +55,6 @@
      * options:
      *   queryParams:额外的查询对象
      */
-    showComboGrid = function (container, options) {
-        var queryParams = {};
-        if (options)
-            queryParams = options.queryParams;
-        $(container).combogrid({
-            url: Utility.serverUrl + 'device/getlist',
-            delay:500,
-            mode: 'remote',
-            idField: 'id',
-            valueField: 'id',
-            textField: 'deviceno',
-            columns: [[
-                {
-                    field: 'assetno',
-                    title: '资产编码',
-                    width: 80
-                }, {
-                    field: 'deviceno',
-                    title: '设备型号',
-                    width: 160,
-                }, {
-                    field: 'username',
-                    title: '设备使用人',
-                    width: 80
-                }, {
-                    field: 'assetpropertyname',
-                    title: '资产属性',
-                    width: 70
-                }, {
-                    field: 'assetcategoryname',
-                    title: '资产类别',
-                    width: 70
-                }, {
-                    field: 'categoryname',
-                    title: '设备类型',
-                    width: 80
-                }, {
-                    field: 'useaddress',
-                    title: '使用地点',
-                    width: 120
-                }
-            ]],
-            panelMinWidth: 400,
-            panelWidth: 'auto',
-            panelMinHeight: 80,
-            panelHeight: 'auto',
-            queryParams: $.extend({
-                belongid: login.getLocalUser().companyid,
-            },queryParams)
-        })
-    }
     //对从服务器获取的数据进行预先处理
     preHandlerDeviceInfo = function (data) {
         var _data = {
@@ -536,6 +484,7 @@
             }
         })
     }
+
     //#region界面初始化
     init = function (container) {
         $container = $(container);
@@ -630,8 +579,8 @@
                             showDeviceAssetChangeRecord(rowData.id);
                         if (item.name === 'device-showStopdevice')
                         {
-                            getDataById(rowData.id).done(function (data) {
-                                devicestop.showUpdate(data);
+                            devicestop.showUpdate({
+                                deviceid: rowData.id
                             });
                         }
                         if (item.name === 'device-showAssettransfer')
@@ -748,7 +697,7 @@
             $container.datagrid('reload');
         });
 
-        /*检查菜单权限*/
+        //#region检查菜单权限
         if (!policy.checkpolicy({
             policyno: 'device-allowusedevice',
             policyname: '设备领用',
@@ -776,11 +725,11 @@
             if (item && item.target)
                 $('#device-grid-contextmenu').menu('disableItem', item.target);
         }
+        //#endregion
     }
     //#endregion
-    /*获取表格筛选参数
-     * 
-     */
+
+    //#region获取筛选参数
     getFilter = function () {
         return {
             key: $('#device-key').val(),
@@ -790,9 +739,9 @@
             statusid: $('#device-status').combobox('getValue')
         };
     }
+    //#endregion
 
     exports.init = init;
-    exports.showComboGrid = showComboGrid;
     exports.showDeviceInfoByUser = showDeviceInfoByUser;
     exports.showUpdate = showUpdate;
     exports.getDataById = getDataById;

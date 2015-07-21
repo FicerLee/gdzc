@@ -3,6 +3,7 @@
 </div>
 <div id="devicestop-toolbar">
     <div class="toolbar">
+        <a href="#" id="devicestop-btnadd" data-options="iconCls:'icon-newadd',plain:true" class="easyui-linkbutton">新增设备停用申请</a>
         <a href="#" id="devicestop-btnexport" data-options="iconCls:'icon-export',plain:true" class="easyui-linkbutton">导出设备停用审核清单</a>
     </div>
     <div class="toolbar">
@@ -34,6 +35,9 @@
         </ul>
         <div class="clear"></div>
     </div>
+</div>
+<div id="devicestop-grid-contextmenu" class="easyui-menu">
+    <div data-options="name:'showDeviceInfo',iconCls:'icon-view'">查看设备属性...</div>
 </div>
 <script>
     seajs.use('app/app.devicestop', function (devicestop) {
