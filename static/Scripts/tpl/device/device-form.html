@@ -1,10 +1,13 @@
-﻿<table id="device-form">
+﻿<table id="device-form" class="table-form">
     <tr>
         <td class="text-right" style="width:160px;">资产编码：</td>
         <td style="width:200px;">
             <input type="text" value="{{assetno}}" id="device-form-assetno" class="easyui-textbox" style="width:120px;" />
         </td>
-        <td class="text-right" style="width:160px;"></td>
+        <td class="text-right" style="width:160px;">
+            <input type="checkbox" value="" class="css-checkbox" id="device-form-ispublic" {{#ispublic}} checked="checked" {{/ispublic}} />
+            <label for="device-form-ispublic" class="css-label">是否公用？</label>
+        </td>
         <td>
         </td>
     </tr>
@@ -121,10 +124,9 @@
         <td colspan="2" class="text-right">
             设备登记日期:<span class="text-red text-bold">{{createddate}}</span>
         </td>
-        <td colspan="2" class="text-center">
-            <a href="" id="device-form-btnsave" data-options="iconCls:'icon-save'" style="width:100px;" class="easyui-linkbutton">提交审核</a>
-            &nbsp;&nbsp;
-            <a href="" id="device-form-btnclose" data-options="iconCls:'icon-cancel'" style="width:100px;" class="easyui-linkbutton">关闭</a>
+        <td>
         </td>
+        <td></td>
+        <td></td>
     </tr>
 </table>

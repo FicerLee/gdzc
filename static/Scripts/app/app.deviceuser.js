@@ -372,6 +372,7 @@
             panelWidth: 'auto',
             panelMinHeight: 100,
             panelHeight: 'auto',
+            panelMaxHeight:200,
             columns: [[
                 {
                     field: 'username',

@@ -10,7 +10,7 @@
         auditstatusStyle,
         saveData;
     serverUrl = 'http://10.33.16.109/gdzcservice/api/';
-    pageList = [50, 80,100];
+    pageList = [50,100,120];
     formatDate = function (value) {
         if (!value) return '';
         var date = Date.parse(value);

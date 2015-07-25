@@ -8,6 +8,7 @@
         deviceimport,
         devicestop,
         view,
+        deviceuser,
         assetproperty,
         assetcategory,
         workproperty,
@@ -30,9 +31,7 @@
         login,
         policy,
         fileexport,
-        doUpdate,
         getDataById,
-        getDataByQueryParams,
         reloadGrid,
         getFilter,
         init;
@@ -51,86 +50,8 @@
     fileexport = require('app/app.export');
     view = require('app/app.device.view');
     devicestop = require('app/app.devicestop');
-    /*显示选择设备的下拉表格
-     * options:
-     *   queryParams:额外的查询对象
-     */
-    //对从服务器获取的数据进行预先处理
-    preHandlerDeviceInfo = function (data) {
-        var _data = {
-            //资产型号
-            assetno: data.assetno,
-            //设备使用人
-            username: data.username,
-            //所在公司
-            companyname: data.companyname,
-            //所在部门
-            departmentname: data.departmentname,
-            //岗位性质
-            postpropertyname: data.postpropertyname,
-            //员工性质
-            workpropertyname: data.workpropertyname,
-            //设备类别
-            categoryname: data.categoryname,
-            //设备型号
-            deviceno: data.deviceno,
-            //出厂编号
-            productno: data.productno,
-            //资产类别
-            assetcategoryname: data.assetcategoryname,
-            //设备状态
-            status: data.status,
-            //启用日期
-            enabledate: Utility.formatDate(data.enabledate),
-            //使用年限
-            limityears: data.limityears,
-            //保期
-            protectyears: data.protectyears,
-            //租赁合同
-            leasecontractno: data.leasecontractno,
-            //使用地点
-            useaddress: data.useaddress,
-            //资产原值
-            assetoriginalvalue: data.assetoriginalvalue,
-            //资产属性
-            assetpropertyname: data.assetpropertyname,
-            //资产归属
-            assetbelongname: data.assetbelongname,
-            //创建人
-            createdusername: data.createdusername,
-            //创建日期
-            createddate: Utility.formatDate(data.createddate),
-            cpu: data.cpu,
-            memory: data.memory,
-            harddisk: data.harddisk,
-            //备注
-            memo: data.memo
-        };
-        return _data;
-    }
-    getDataByQueryParams = function (args) {
-        var data = {};
-        $.ajax({
-            url: Utility.serverUrl + 'device/getlist',
-            type: 'post',
-            data: args,
-            async: false,
-            dataType: 'json',
-            beforeSend: function () {
-                $.messager.progress({
-                    text: '正在查询数据，请稍候...'
-                });
-            },
-            complete: function () {
-                $.messager.progress('close');
-            },
-            success: function (res) {
-                if (res.success)
-                    data = res.rows;
-            }
-        });
-        return data;
-    }
+    deviceuser = require('app/app.deviceuser');
+
     /*通过设备使用人Id获取设备Id*/
     showDeviceInfoByUser = function (userid) {
         //获取设备信息
@@ -284,9 +205,7 @@
                 id: id
             }
         });
-        if (!data)
-            deferred.reject('无设备数据信息');
-        else
+        if (data)
             deferred.resolve(data.rows);
         return deferred.promise();
     }
@@ -334,156 +253,132 @@
             })
         });
     }
-    /*显示更新*/
-    showUpdate = function (args) {
-        var data = {};
-        if (args.action == 'addnew') {
-            data = {
-                assetno: '',
-                deviceno: '',
-                categoryid: null,
-                assetcategoryid: null,
-                statusid: null,
-                assetpropertyid: null,
-                assetbelongid: null,
-                deviceuserid: null,
-                createddate: new Date().toString('yyyy-MM-dd HH:mm:ss'),
-                productno: '',
-                isrepaired: false,
-                enabledate: new Date().toString('yyyy-MM-dd'),
-                limityears: 5,
-                protectyears: 1,
-                leasecontractno: '',
-                useaddress: '',
-                assetoriginalvalue: null,
-                cpu: '',
-                memory: '',
-                harddisk: '',
-                memo: '',
-                action: 'addnew'
-            };
-        } else {
-            data = getDataById(args.id);
-            if (!data || data == null) return false;
-            data.action = args.action;
-        }
+
+
+    //#region 设置设备属性
+    showUpdate = function (data) {
+        var deferred = $.Deferred();
         var tpl = require('tpl/device/device-form.html');
-        require('tpl/device/device-form.css');
         var output = Mustache.render(tpl, data);
+        var container = '#device-form';
         $(output).dialog({
             width: 680,
             height: 420,
-            title: args.action === 'addnew' ? '新增设备' : '修改设备',
+            title: data.action === 'addnew' ? '新增设备' : '修改设备',
             modal: true,
             onOpen: function () {
                 /*初始化组件*/
-                $.parser.parse('#device-form');
-                var deviceusercontainer = '#device-form-deviceuser';
-                var companycontainer = '#device-form-company';
-                var categorycontainer = '#device-form-category';
-                var assetpropertycontainer = '#device-form-assetproperty';
-                var devicestatuscontainer = '#device-form-status';
-                var assetcategorycontainer = '#device-form-assetcategory';
-                var assetbelongcontainer = '#device-form-assetbelong';
-                require.async([
-                    'app/app.deviceuser',
-                    'app/app.company',
-                    'app/app.devicecategory',
-                    'app/app.assetproperty',
-                    'app/app.devicestatus',
-                    'app/app.assetcategory'
-                ], function (deviceuser, company, category, assetproperty, status, assetcategory) {
-                    deviceuser.showComboGrid(deviceusercontainer);
-                    company.showComboTree(companycontainer);
-                    category.showComboTree(categorycontainer);
-                    assetproperty.showComboTree(assetpropertycontainer);
-                    status.showCombo(devicestatuscontainer);
-                    assetcategory.showCombo(assetcategorycontainer);
-                    company.showComboTree(assetbelongcontainer);
-                });
+                $.parser.parse(container);
+                var deviceusercontainer = container + '-deviceuser';
+                var categorycontainer = container + '-category';
+                var assetpropertycontainer = container + '-assetproperty';
+                var devicestatuscontainer = container + '-status';
+                var assetcategorycontainer = container + '-assetcategory';
+                var assetbelongcontainer = container + '-assetbelong';
+                deviceuser.showComboGrid(deviceusercontainer);
+                category.showComboTree(categorycontainer);
+                assetproperty.showComboTree(assetpropertycontainer);
+                status.showCombo(devicestatuscontainer);
+                assetcategory.showCombo(assetcategorycontainer);
+                belong.showCombo(assetbelongcontainer);
             },
             onClose: function () {
                 $('#device-form').dialog('destroy', true);
-            }
-        })
-        //绑定保存
-        $('#device-form-btnsave').on('click', function (e) {
-            e.preventDefault();
-            data = {
-                id: args.id,
-                productno: $('#device-form-productno').val(),
-                leasecontractno: $('#device-form-leasecontractno').val(),
-                useaddress: $('#device-form-useaddress').val(),
-                statusid: $('#device-form-status').combobox('getValue') || null,
-                assetno: $('#device-form-assetno').val(),
-                deviceno: $('#device-form-deviceno').val(),
-                categoryid: $('#device-form-category').combotree('getValue') || null,
-                categoryname: $('#device-form-category').combotree('getText') || null,
-                assetcategoryid: $('#device-form-assetcategory').combobox('getValue') || null,
-                assetcategoryname: $('#device-form-assetcategory').combobox('getText') || null,
-                assetpropertyid: $('#device-form-assetproperty').combotree('getValue') || null,
-                assetpropertyname: $('#device-form-assetproperty').combotree('getText') || null,
-                assetbelongid: $('#device-form-assetbelong').combotree('getValue') || null,
-                assetbelongname: $('#device-form-assetbelong').combotree('getText') || null,
-                deviceuserid: $('#device-form-deviceuser').combogrid('getValue') || null,
-                deviceusername: $('#device-form-deviceuser').combogrid('getText') || null,
-                //createddate: new Date().toString('yyyy-MM-dd HH:mm:ss'),
-                isrepaired: $('#device-form-isrepaired').is(':checked'),
-                enabledate: $('#device-form-enabledate').datebox('getValue') || null,
-                limityears: $('#device-form-limityears').numberbox('getValue') || 5,
-                protectyears: $('#device-form-protectyears').numberbox('getValue') || 1,
-                assetoriginalvalue: $('#device-form-assetoriginalvalue').numberbox('getValue') || 0,
-                cpu: $('#device-form-cpu').val(),
-                memory: $('#device-form-memory').val(),
-                harddisk: $('#device-form-harddisk').val(),
-                memo: $('#device-form-memo').val(),
-                action: args.action
-            };
-            doUpdate(data);
-        });
-        /*绑定关闭*/
-        $('#device-form-btnclose').on('click', function (e) {
-            e.preventDefault();
-            closeForm();
-        });
-    }
-    /*关闭表单*/
-    closeForm = function () {
-        $('#device-form').dialog('close');
-    }
-    /*执行更新*/
-    doUpdate = function (data) {
-        var path = '';
-        var _data = {};
-        if (data.action == 'addnew') {
-            path = 'auditnewdevice/submit';
-            _data = data;
-            _data.creatorid = login.getLocalUser().usercode;
-        }
-        else if (data.action == 'edit') {
-            path = 'auditeditdevice/submit';
-            _data = {
-                deviceid: data.id,
-                values: data,
-                creatorid: login.getLocalUser().usercode
-            };
-        }
-        else if (data.action == 'remove')
-            path = 'auditremovedevice/remove';
-        Utility.saveData({
-            path: path,
-            params: _data,
-            success: function (res) {
-                $.messager.alert('成功', '该设备信息已成功提交审核', 'info');
-                closeForm();
-                if ($container)
-                    reloadGrid();
             },
-            error: function (res) {
-                $.messager.alert('失败', res, 'error');
-            }
-        })
+            buttons: [
+                {
+                    iconCls: 'icon-save',
+                    text: '提交审核',
+                    handler: function () {
+                        var _data = {
+                            id: data.id,
+                            productno: $(container + '-productno').val(),
+                            leasecontractno: $(container + '-leasecontractno').val(),
+                            useaddress: $(container + '-useaddress').val(),
+                            statusid: $(container + '-status').combobox('getValue') || null,
+                            assetno: $(container + '-assetno').val(),
+                            deviceno: $(container + '-deviceno').val(),
+                            categoryid: $(container + '-category').combotree('getValue') || null,
+                            categoryname: $(container + '-category').combotree('getText') || null,
+                            assetcategoryid: $(container + '-assetcategory').combobox('getValue') || null,
+                            assetcategoryname: $(container + '-assetcategory').combobox('getText') || null,
+                            assetpropertyid: $(container + '-assetproperty').combotree('getValue') || null,
+                            assetpropertyname: $(container + '-assetproperty').combotree('getText') || null,
+                            assetbelongid: $(container + '-assetbelong').combobox('getValue') || null,
+                            assetbelongname: $(container + '-assetbelong').combobox('getText') || null,
+                            deviceuserid: $(container + '-deviceuser').combogrid('getValue') || null,
+                            deviceusername: $(container + '-deviceuser').combogrid('getText') || null,
+                            createddate: data.createddate,
+                            isrepaired: $(container + '-isrepaired').is(':checked'),
+                            enabledate: $(container + '-enabledate').datebox('getValue') || null,
+                            limityears: $(container + '-limityears').numberbox('getValue') || 5,
+                            protectyears: $(container + '-protectyears').numberbox('getValue') || 1,
+                            assetoriginalvalue: $(container + '-assetoriginalvalue').numberbox('getValue') || 0,
+                            cpu: $(container + '-cpu').val(),
+                            memory: $(container + '-memory').val(),
+                            harddisk: $(container + '-harddisk').val(),
+                            memo: $(container + '-memo').val(),
+                            ispublic:$(container+'-ispublic').is(':checked'),
+                            action: data.action,
+                            creatorid:login.getLocalUser().usercode
+                        };
+                        try {
+                            if (!_data.deviceno)
+                                throw new Error('设备型号不能为空');
+                            if (!_data.statusid)
+                                throw new Error('设备状态不能为空');
+                            if (!_data.categoryid)
+                                throw new Error('设备类型不能为空');
+                            if (!_data.assetcategoryid)
+                                throw new Error('资产类型不能为空');
+                            if (!_data.enabledate)
+                                throw new Error('启用日期不能为空');
+                            if (!_data.assetbelongid)
+                                throw new Error('资产归属不能为空');
+                            var path = _data.action === 'addnew' ? 'auditnewdevice/submit' : 'auditeditdevice/submit';
+                            if (_data.action == 'addnew') {
+                                Utility.saveData({
+                                    path: 'auditnewdevice/submit',
+                                    params: _data,
+                                    success: function (res) {
+                                        $.messager.alert('成功', '该设备信息已成功提交审核', 'info');
+                                        $(container).dialog('close');
+                                        deferred.resolve();
+                                    },
+                                    error: function (message) {
+                                        $.messager.alert('错误', message, 'error');
+                                    }
+                                });
+                            } else if (_data.action == 'edit') {
+                                Utility.saveData({
+                                    path: 'auditeditdevice/submit',
+                                    params:{
+                                        deviceid: data.id,
+                                        values: _data,
+                                        creatorid:login.getLocalUser().usercode
+                                    },
+                                    success: function (res) {
+                                        $.messager.alert('成功', '该设备信息已成功提交审核', 'info');
+                                        $(container).dialog('close');
+                                        deferred.resolve();
+                                    },
+                                    error: function (message) {
+                                        $.messager.alert('错误', message, 'error');
+                                    }
+                                });
+                            }
+
+                        } catch (e) {
+                            $.messager.alert('警告', e.message, 'warning');
+                        }
+                    }
+                }
+            ]
+        });
+
+        return deferred.promise();
     }
+    //#endregion
 
     //#region界面初始化
     init = function (container) {
@@ -535,8 +430,9 @@
                 field: 'username',
                 title: '使用人',
             }, {
-                field: 'createddate',
-                title: '登记时间',
+                field: 'enabledate',
+                title: '启用时间',
+                width: 130
             }, {
                 field: 'workpropertyname',
                 title: '用工性质',
@@ -548,8 +444,9 @@
             rownumbers: true,
             singleSelect: true,
             border: false,
-            view: scrollview,
-            pageSize:Utility.pageList[0],
+            pageSize: Utility.pageList[0],
+            pageList: Utility.pageList,
+            pagination: true,
             toolbar: '#device-toolbar',
             fit: true,
             striped: true,
@@ -577,8 +474,7 @@
                             showDeviceAuditRecord(rowData.id);
                         if (item.name === 'device-showAssetpropertyrecord')
                             showDeviceAssetChangeRecord(rowData.id);
-                        if (item.name === 'device-showStopdevice')
-                        {
+                        if (item.name === 'device-showStopdevice') {
                             devicestop.showUpdate({
                                 deviceid: rowData.id
                             });
@@ -604,7 +500,11 @@
             }),
             onClick: function () {
                 showUpdate({
-                    action: 'addnew'
+                    action: 'addnew',
+                    limityears: 6,
+                    protectyears: 1,
+                    assetbelongid: login.getLocalUser().companyid,
+                    createddate: new Date().toString('yyyy-MM-dd')
                 });
             }
         });
@@ -618,10 +518,11 @@
             onClick: function () {
                 var row = $container.datagrid('getSelected');
                 if (!row) return false;
-                showUpdate({
-                    action: 'edit',
-                    id: row.id
-                })
+                getDataById(row.id).done(function (data) {
+                    showUpdate($.extend(data, {
+                        action: 'edit'
+                    }));
+                });
             }
         });
         /*删除设备*/
@@ -636,10 +537,16 @@
                 if (!row) return false;
                 $.messager.confirm('警告', '是否确认删除此设备信息?!', function (r) {
                     if (r) {
-                        doUpdate({
-                            id: row.id,
-                            action: 'remove'
-                        })
+                        Utility.saveData({
+                            path: 'auditremovedevice/submit',
+                            params: {
+                                deviceid: row.id,
+                                creatorid: login.getLocalUser().usercode,
+                            },
+                            success: function (res) {
+                                $.messager.alert('成功', '该设备已成功提交设备删除申请', 'info');
+                            }
+                        });
                     }
                 });
             }
