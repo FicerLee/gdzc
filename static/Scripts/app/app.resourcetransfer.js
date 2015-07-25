@@ -159,9 +159,18 @@
             onOpen: function () {
                 $.parser.parse(container);
                 assetproperty.showComboTree(container + '-assetproperty');
+                $(container + '-device').removeData('device');
                 $(container + '-btnselect').linkbutton({
                     onClick: function () {
-
+                        view.select({
+                            assetbelongid: login.getLocalUser().companyid
+                        }).done(function (rows) {
+                            var row = rows[0];
+                            $(container + '-device').html(row.deviceno);
+                            $(container + '-original-assetproperty').html(row.assetpropertyname);
+                            $(container + '-device').data('device', row.id);
+                            console.log($(container + '-device').data('device'));
+                        });
                     }
                 });
             },
@@ -173,7 +182,30 @@
                     iconCls: 'icon-save',
                     text: '提交申请',
                     handler: function () {
-
+                        var _data = {
+                            deviceid: $(container + '-device').data('device'),
+                            assetpropertyid: $(container + '-assetproperty').combotree('getValue')
+                        };
+                        try {
+                            if (!_data.deviceid)
+                                throw new Error('设备不能为空');
+                            if (!_data.assetpropertyid)
+                                throw new Error('设备资产属性不能为空');
+                        } catch (e) {
+                            $.messager.alert('错误', e.message, 'warning');
+                        }
+                        Utility.saveData({
+                            path: 'auditresourcetransfer/submit',
+                            params: $.extend(_data, {
+                                creatorid:login.getLocalUser().usercode
+                            }),
+                            success: function (res) {
+                                $.messager.alert('成功', '该设备资产属性变更已成功提交审核', 'info');
+                            },
+                            error: function (message) {
+                                $.messager.alert('错误', message, 'warning');
+                            }
+                        })
                     }
                 }
             ]

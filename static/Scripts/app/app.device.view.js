@@ -114,7 +114,79 @@
 
     //#region选择设备的弹出框
     select = function (options) {
-
+        var options = options || {};
+        var queryParams=options.queryParams||{}
+        var deferred = $.Deferred();
+        var tpl = require('tpl/device/select.html');
+        var container = '#device-select';
+        $(tpl).dialog({
+            modal: true,
+            width: 600,
+            height: 400,
+            title: '选择设备',
+            onOpen: function () {
+                $.parser.parse(container);
+                $(container + '-grid').datagrid({
+                    columns: [[
+                        {
+                            field: 'id',
+                            checkbox: true
+                        }, {
+                            field: 'assetno',
+                            title: '资产编码',
+                        }, {
+                            field: 'deviceno',
+                            title: '设备型号'
+                        }, {
+                            field: 'deviceusername',
+                            title: '设备使用人'
+                        }, {
+                            field: 'assetpropertyname',
+                            title: '资产属性'
+                        }, {
+                            field: 'categoryname',
+                            title: '设备类别'
+                        }, {
+                            field: 'statusname',
+                            title: '设备状态'
+                        }, {
+                            field: 'postpropertyname',
+                            title: '岗位性质'
+                        }
+                    ]],
+                    border:false,
+                    fit: true,
+                    singleSelect:true,
+                    url: Utility.serverUrl + 'device/getlist',
+                    toolbar:container+'-toolbar',
+                    queryParams: queryParams
+                })
+            },
+            onClose: function () {
+                $(container).dialog('destroy', true);
+            },
+            buttons: [
+                {
+                    iconCls: 'icon-view',
+                    text: '选择勾选',
+                    handler: function () {
+                        var rows = $(container + '-grid').datagrid('getChecked');
+                        if (rows && rows.length > 0) {
+                            deferred.resolve(rows);
+                            $(container).dialog('close');
+                        }
+                    }
+                }
+            ]
+        });
+        $(container + '-btnsearch').linkbutton({
+            onClick: function () {
+                $(container + '-grid').datagrid('reload', $.extend(queryParams, {
+                    key: $(container + '-key').val()
+                }));
+            }
+        })
+        return deferred.promise();
     }
     //#endregion
 
