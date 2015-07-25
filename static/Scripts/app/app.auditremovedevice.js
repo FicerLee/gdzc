@@ -101,13 +101,13 @@
                                 deviceids: [rowData.deviceid]
                             });
                         } else if (item.name == 'doReSubmit') {
-
+//TODO:未完成
                         } else if (item.name == 'doPass') {
-
+//TODO:未完成
                         } else if (item.name == 'doReject') {
-
+//TODO:未完成
                         } else if (item.name == 'doRemove') {
-
+//TODO:未完成
                         }
                     }
                 });
@@ -125,7 +125,7 @@
                 groupname: '设备资料维护'
             }),
             onClick: function () {
-
+//TODO:未完成
             }
         });
         /*导出历史记录*/
@@ -136,7 +136,7 @@
                 groupname: '审核删除设备'
             }),
             onClick: function () {
-
+//TODO:未完成
             }
         });
         /*检查菜单*/

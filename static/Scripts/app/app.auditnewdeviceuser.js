@@ -1,6 +1,7 @@
 ﻿define(function (require, exports, module) {
     var
         $container,
+        tag,
         deviceuser,
         showAuditInfo,
         showUserInfoByAuditId,
@@ -20,6 +21,7 @@
         policy,
         fileexport,
         init;
+    tag='#auditnewdeviceuser';
     login = require('app/app.login');
     policy = require('app/app.policy');
     company = require('app/app.company');
@@ -30,11 +32,11 @@
     fileexport = require('app/app.export');
     closeForm = function () {
         $('#auditdeviceuser-form').dialog('close');
-    }
+    };
     reloadGrid = function () {
         if ($container)
-            $container.datagrid('load', getFilter());
-    }
+            $container.datagrid('reload', getFilter());
+    };
     getFilter = function () {
         return {
             key: $('#auditnewdeviceuser-key').val(),
@@ -51,7 +53,7 @@
             }
         });
         return !data ? null : data.rows;
-    }
+    };
     showAuditInfo = function (id) {
         var data = getDataById(id);
         if (!data) return false;
@@ -83,7 +85,7 @@
             createddate: Utility.formatDate(data.createddate),
             creatorname: data.creatorname,
             statusname:data.statusname
-        }
+        };
         require.async([
             'tpl/auditdeviceuser/auditdeviceuser-form.html',
             'tpl/auditdeviceuser/auditdeviceuser-form.css'
@@ -101,12 +103,12 @@
                 onClose: function () {
                     $(formContainer).dialog('destroy', true);
                 }
-            })
+            });
             var handlerdata = {
                 id: data.id,
                 action: data.action,
                 completerid: login.getLocalUser().usercode
-            }
+            };
             /*绑定事件*/
             $('#auditdeviceuser-form-btnsubmit').on('click', function (e) {
                 e.preventDefault();
@@ -125,7 +127,7 @@
                 doReSubmit(handlerdata);
             });
         });
-    }
+    };
     showUserInfoByAuditId = function (auditid) {
         var data = getDataById(auditid);
         if (!data || data.deviceuserid) {
@@ -133,7 +135,7 @@
             return false;
         }
         deviceuser.showUserInfo(data.deviceuserid);
-    }
+    };
     /*审核通过
      * options
      *  id:'待审核明细Id
@@ -152,7 +154,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     /*审核退回*/
     doReject = function (options) {
         Utility.saveData({
@@ -167,7 +169,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     /*审核删除
      * options:
      *  id:审核明细Id
@@ -186,7 +188,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     /*再次提交审核
      * options:
      *  id:审核id，
@@ -205,7 +207,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     init = function (container) {
         $container = $(container);
         //显示单位信息
