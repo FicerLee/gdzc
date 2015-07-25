@@ -16,7 +16,7 @@
             }
         });
         return !data ? null : data.rows;
-    }
+    };
     //#endregion
 
     //#region显示设备信息
@@ -51,9 +51,9 @@
                     $(container).dialog('destroy', true);
                 }
             })
-        };
+        }
         return deferred.promise();
-    }
+    };
     //#endregion
 
     //#region选择设备信息
@@ -76,7 +76,7 @@
                 }, {
                     field: 'deviceno',
                     title: '设备型号',
-                    width: 160,
+                    width: 160
                 }, {
                     field: 'username',
                     title: '设备使用人',
@@ -109,13 +109,13 @@
             }, queryParams)
         });
         return deferred.promise();
-    }
+    };
     //#endregion
 
     //#region选择设备的弹出框
     select = function (options) {
-        var options = options || {};
-        var queryParams=options.queryParams||{}
+        options = options || {};
+        var queryParams=options.queryParams||{};
         var deferred = $.Deferred();
         var tpl = require('tpl/device/select.html');
         var container = '#device-select';
@@ -185,9 +185,9 @@
                     key: $(container + '-key').val()
                 }));
             }
-        })
+        });
         return deferred.promise();
-    }
+    };
     //#endregion
 
 

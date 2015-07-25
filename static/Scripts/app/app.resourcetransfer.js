@@ -7,6 +7,7 @@
         category,
         getFilter,
         showUpdate,
+        reloadGrid,
         login,
         assetproperty,
         init;
@@ -36,33 +37,33 @@
                 {
                     field: 'assetno',
                     title: '资产编码',
-                    sortable: true,
+                    sortable: true
                 }, {
                     field: 'deviceno',
                     title: '设备型号',
                     sortable: true
                 }, {
                     field: 'categoryname',
-                    title: '设备类型',
+                    title: '设备类型'
                 }, {
                     field: 'assetcategoryname',
-                    title: '资产类型',
+                    title: '资产类型'
                 }, {
                     field: 'companyname',
-                    title: '部门单位',
+                    title: '部门单位'
                 }, {
                     field: 'assetbelong',
-                    title: '资产归属',
+                    title: '资产归属'
                 }, {
                     field: 'createddate',
                     title: '申请转移时间',
                     width:130
                 }, {
                     field: 'originalassetproperty',
-                    title: '原资源属性',
+                    title: '原资源属性'
                 }, {
                     field: 'newassetproperty',
-                    title: '申请资源属性',
+                    title: '申请资源属性'
                 }, {
                     field: 'completeddate',
                     title: '审核完成时间',
@@ -106,19 +107,7 @@
                 groupname: '设备资源池维护'
             }),
             onClick: function () {
-                showUpdate({
-                    action: 'addnew'
-                });
-            }
-        });
-        $('#resourcetransfer-btnedit').linkbutton({
-            disabled: !policy.checkpolicy({
-                policyno: 'resourcetransfer-allowedit',
-                policyname: '修改资源转移申请',
-                groupname: '设备资源池维护'
-            }),
-            onClick: function () {
-
+                showUpdate().done(reloadGrid);
             }
         });
         $('#resourcetransfer-btnexport').linkbutton({
@@ -136,7 +125,7 @@
                 $(container).datagrid('reload', getFilter());
             }
         })
-    }
+    };
     //#region获取筛选
     getFilter = function () {
         return {
@@ -144,11 +133,12 @@
             categoryid: $('#resourcetransfer-category').combotree('getValue'),
             companyid: $('#resourcetransfer-company').combotree('getValue')
         };
-    }
+    };
     //#endregion
 
     //#region设置资产转移
-    showUpdate = function (data) {
+    showUpdate = function () {
+        var deferred= $.Deferred();
         var tpl = require('tpl/resourcetransfer/form.html');
         var container = '#resourcetransfer-form';
         $(tpl).dialog({
@@ -160,6 +150,7 @@
                 $.parser.parse(container);
                 assetproperty.showComboTree(container + '-assetproperty');
                 $(container + '-device').removeData('device');
+                $(container+'-original-assetproperty').removeData('oldproperty');
                 $(container + '-btnselect').linkbutton({
                     onClick: function () {
                         view.select({
@@ -169,7 +160,7 @@
                             $(container + '-device').html(row.deviceno);
                             $(container + '-original-assetproperty').html(row.assetpropertyname);
                             $(container + '-device').data('device', row.id);
-                            console.log($(container + '-device').data('device'));
+                            $(container+'-original-assetproperty').data('oldproperty',row.assetpropertyid);
                         });
                     }
                 });
@@ -184,15 +175,19 @@
                     handler: function () {
                         var _data = {
                             deviceid: $(container + '-device').data('device'),
-                            assetpropertyid: $(container + '-assetproperty').combotree('getValue')
+                            newpropertyid: $(container + '-assetproperty').combotree('getValue'),
+                            oldpropertyid:$(container+'-original-assetproperty').data('oldproperty')
                         };
                         try {
                             if (!_data.deviceid)
                                 throw new Error('设备不能为空');
                             if (!_data.assetpropertyid)
                                 throw new Error('设备资产属性不能为空');
+                            if(!_data.assetpropertyid!==_data.oldpropertyid)
+                                throw new Error('更改的资产属性不能相同');
                         } catch (e) {
                             $.messager.alert('错误', e.message, 'warning');
+                            return false;
                         }
                         Utility.saveData({
                             path: 'auditresourcetransfer/submit',
@@ -201,6 +196,8 @@
                             }),
                             success: function (res) {
                                 $.messager.alert('成功', '该设备资产属性变更已成功提交审核', 'info');
+                                $(container).dialog('close');
+                                deferred.resolve();
                             },
                             error: function (message) {
                                 $.messager.alert('错误', message, 'warning');
@@ -210,7 +207,15 @@
                 }
             ]
         });
-    }
+        return deferred.promise();
+    };
+    //#endregion
+
+    //#region刷新数据表
+    reloadGrid=function(){
+        if($('#resourcetransfer-grid'))
+          $('#resourcetransfer-grid').datagrid('reload',getFilter());
+    };
     //#endregion
     exports.init = init;
 });

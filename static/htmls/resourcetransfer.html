@@ -4,7 +4,6 @@
 <div id="resourcetransfer-toolbar">
     <div class="toolbar">
         <a id="resourcetransfer-btnadd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newadd',plain:true">新增转移申请</a>
-        <a id="resourcetransfer-btnedit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-newedit',plain:true">修改转移申请</a>
         <a id="resourcetransfer-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出申请记录</a>
     </div>
     <div class="toolbar">
@@ -30,13 +29,7 @@
     </div>
 </div>
 <div id="resourcetransfer-grid-contextmenu" class="easyui-menu">
-    <div>
-        <span>查看</span>
-        <div>
-            <div data-options="name:'resourcetransfer-showDeviceInfo'">查看设备详细信息...</div>
-        </div>
-    </div>
-    <div data-options="name:'resourcetransfer-showSumitdeviceuse'">提交转移审核...</div>
+    <div data-options="name:'showDeviceInfo'">查看设备详细信息...</div>
 </div>
 <script>
     seajs.use('app/app.resourcetransfer', function (resourcetransfer) {

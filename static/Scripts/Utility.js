@@ -9,7 +9,8 @@
         crypto,
         auditstatusStyle,
         saveData;
-    serverUrl = 'http://10.33.16.109/gdzcservice/api/';
+    //serverUrl = 'http://10.33.16.109/gdzcservice/api/';
+    serverUrl='http://lgps.dfac.com/gdzcservice/api/';
     pageList = [50,100,120];
     formatDate = function (value) {
         if (!value) return '';
@@ -20,7 +21,7 @@
             date = Date.parse(value);
         }
         return date.toString('yyyy-MM-dd HH:mm:ss');
-    }
+    };
     auditstatusStyle = function (value) {
         if (value == '审核通过') {
             return {
@@ -34,8 +35,8 @@
             return {
                 class: 'text-new'
             };
-        };
-    }
+        }
+    };
     getUrlParam = function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -68,7 +69,7 @@
         });
         return data;
 
-    }
+    };
     /*保存数据到服务器,返回一个Deferred对象
      * path:服务器路径
      * params:提交参数
@@ -105,10 +106,10 @@
                 $.messager.alert('错误', '数据更新出错', 'error');
             }
         });
-    }
+    };
     crypto = function (value) {
         return faultylabs.MD5(value);
-    }
+    };
     return {
         getUrlParam: getUrlParam,
         serverUrl: serverUrl,
