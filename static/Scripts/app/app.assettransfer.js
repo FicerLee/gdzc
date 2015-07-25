@@ -8,14 +8,14 @@
         doSubmit,
         showAddDevice,
         fileexport,
-        device,
+        view,
         init;
     belong = require('app/app.belong');
     fileexport = require('app/app.export');
     policy = require('app/app.policy');
     login = require('app/app.login');
-    device = require('app/app.device');
-    /*初始化grid*/
+    view= require('app/app.device.view');
+    //#region/*初始化grid*/
     init = function (container) {
         //显示单位信息
         belong.showCombo('#assettransfer-from');
@@ -32,18 +32,29 @@
         //显示主数据信息
         $(container).datagrid({
             columns: [[{
-                field: 'billno',
-                title: '单号',
-                sortable: true
+                field: 'deviceno',
+                title: '设备型号'
             }, {
-                field: 'fromcompany',
+                field: 'categoryname',
+                title:'设备类别'
+            }, {
+                field: 'assetno',
+                title:'资产编码'
+            }, {
+                field: 'deviceusername',
+                title:'设备使用人'
+            }, {
+                field: 'statusname',
+                title:'审核状态'
+            },{
+                field: 'fromcompanyname',
                 title: '转出单位',
             }, {
-                field: 'tocompany',
+                field: 'tocompanyname',
                 title: '转入单位',
             }, {
                 field: 'createddate',
-                title: '转入时间',
+                title: '提交时间',
             }, {
                 field: 'status',
                 title: '状态',
@@ -57,11 +68,16 @@
             fit: true,
             striped: true,
             onRowContextMenu: function (e, rowIndex, rowData) {
+                $(container).datagrid('selectRow', rowIndex);
                 $('#assettransfer-grid-contextmenu').menu("show", {
                     left: e.pageX,
                     top: e.pageY,
                     onClick: function (item) {
-                        alert(item.text);
+                        if (item.name == 'showDeviceInfo') {
+                            view.showInfo({
+                                deviceids: [rowData.deviceid]
+                            });
+                        }
                     }
                 });
                 e.preventDefault();
@@ -69,6 +85,7 @@
             url: Utility.serverUrl + 'AuditAssetTransfer/getlist',
             queryParams: getFilter()
         });
+        //#endregion
         /*绑定事件*/
         /*新增资产转移*/
         $('#assettransfer-btnadd').linkbutton({
@@ -103,13 +120,19 @@
                 })
             }
         })
+        /*搜索*/
+        $('#assettransfer-btnsearch').linkbutton({
+            onClick: function () {
+                $(container).datagrid('reload');
+            }
+        });
     }
     /*获取筛选值*/
     getFilter = function () {
         return {
             key: $('#assettransfer-key').val(),
             fromcompanyid: $('#assettransfer-from').combobox('getValue'),
-            tobecompanyid: $('#assettransfer-to').combobox('getValue')
+            tocompanyid: $('#assettransfer-to').combobox('getValue')
         };
     }
     /*资产转移设置
@@ -169,11 +192,10 @@
                             iconCls: 'icon-newadd',
                             text: '新增转移设备',
                             handler: function () {
-                                showAddDevice(function (data) {
-                                    console.log(data);
+                                showAddDevice().done(function (row) {
                                     $(grid).datagrid('insertRow', {
                                         index: 0,
-                                        row:data
+                                        row: row
                                     });
                                 });
                             }
@@ -191,24 +213,26 @@
                             text: '提交审核信息',
                             handler: function () {
                                 var rows = $(grid).datagrid('getRows');
-                                try {
+                                //try {
                                     if (rows.length <= 0)
                                         throw new Error('你还未提交任何数据');
                                     var deviceids = [];
+                                    var tocompanyid = {};
                                     $.each(rows, function (index, row) {
                                         deviceids.push(row.deviceid);
+                                        tocompanyid = row.tocompanyid;
                                     });
                                     doSubmit({
-                                        deviceids:deviceids ,
+                                        deviceids: deviceids,
                                         creatorid: login.getLocalUser().usercode,
                                         fromcompanyid: login.getLocalUser().companyid,
-                                        tocompanyid: row.tocompanyid
-                                    }, function () {
+                                        tocompanyid: tocompanyid
+                                    }).done(function () {
                                         $(container).dialog('close');
-                                    })
-                                } catch (e) {
-                                    $.messager.alert('警告', e.message, 'warning');
-                                }
+                                    });
+                                //} catch (e) {
+                                //    $.messager.alert('警告', e.message, 'warning');
+                                //}
                             }
                         }
                     ]
@@ -220,13 +244,10 @@
         })
     }
     /*新增转移设备
-     * callback:回调函数
-     *    callback回调传回data
-     *    data:
-     *      deviceid:
-     *      tocompanyid:
+     * 
      */
-    showAddDevice = function (callback) {
+    showAddDevice = function () {
+        var deferred = $.Deferred();
         var tpl = require('tpl/assettransfer/add.html');
         var container = '#assettransfer-add';
         $(tpl).dialog({
@@ -236,7 +257,7 @@
             height: 200,
             onOpen: function () {
                 $.parser.parse(container);
-                device.showComboGrid(container + '-device');
+                view.showComboGrid(container + '-device');
                 belong.showCombo(container + '-tocompany');
             },
             onClose: function () {
@@ -245,7 +266,6 @@
         });
         $(container + '-btnadd').linkbutton({
             onClick: function () {
-                var devicedata={};
                 var data = {
                     deviceid: $(container + '-device').combogrid('getValue'),
                     tocompanyid: $(container + '-tocompany').combobox('getValue'),
@@ -254,26 +274,27 @@
                 try {
                     if (!data.deviceid)
                         throw new Error('必须选择设备');
-                    devicedata = device.getDataById(data.deviceid);
+                    var devicedata = view.getDataById(data.deviceid);
                     if (!devicedata)
                         throw new Error('该设备记录并不存在');
                     if (!data.tocompanyid)
                         throw new Error('必须选择设备转移公司');
                     if (data.tocompanyid == login.getLocalUser().companyid)
                         throw new Error('资产转移的公司不能为自己所属的公司');
+                    data = $.extend(data, {
+                        creatorid: login.getLocalUser().usercode,
+                        fromcompanyid: login.getLocalUser().companyid
+                    }, devicedata);
+                    deferred.resolve(data);
+                    $(container).dialog('close');
                 } catch (e) {
                     $.messager.alert('警告', e.message, 'warning');
                     return false;
                 }
-                data = $.extend(data, {
-                    creatorid: login.getLocalUser().usercode,
-                    fromcompanyid: login.getLocalUser().companyid
-                },devicedata);
-                if (callback)
-                    callback(data);
-                $(container).dialog('close');
+               
             }
-        })
+        });
+        return deferred.promise();
     }
     /*提交审核
      * options:
@@ -282,8 +303,8 @@
      *  tocompanyid
      *  deviceids:deviceid数组
      */
-    doSubmit = function (options, callback) {
-        Utility.saveData({
+    doSubmit = function (options) {
+        return Utility.saveData({
             path: 'auditassettransfer/submit',
             params: options,
             success: function (res) {
@@ -294,7 +315,7 @@
             error: function (message) {
                 $.messager.alert('错误', message, 'warning');
             }
-        })
+        });
     }
     exports.init = init;
 });

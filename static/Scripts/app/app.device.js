@@ -205,9 +205,7 @@
                 id: id
             }
         });
-        if (data)
-            deferred.resolve(data.rows);
-        return deferred.promise();
+        return !data ? null : data.rows;
     }
     //#endregion
     /*显示导出*/
@@ -518,11 +516,10 @@
             onClick: function () {
                 var row = $container.datagrid('getSelected');
                 if (!row) return false;
-                getDataById(row.id).done(function (data) {
-                    showUpdate($.extend(data, {
-                        action: 'edit'
-                    }));
-                });
+                var data = getDataById(row.id);
+                showUpdate($.extend(data, {
+                    action: 'edit'
+                }));
             }
         });
         /*删除设备*/
@@ -601,7 +598,7 @@
         /*搜索*/
         $('#device-btnsearch').on('click', function (e) {
             e.preventDefault();
-            $container.datagrid('reload');
+            $container.datagrid('reload',getFilter());
         });
 
         //#region检查菜单权限

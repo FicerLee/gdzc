@@ -1,19 +1,35 @@
 ﻿define(function (require, exports, module) {
     var
         device,
+        getDataById,
         showComboGrid,
+        select,
         showInfo;
     device = require('app/app.device');
+
+    //#region根据ID获取设备信息
+    getDataById = function (id) {
+        var data = Utility.getData({
+            path: 'device/get',
+            data: {
+                id: id
+            }
+        });
+        return !data ? null : data.rows;
+    }
+    //#endregion
+
     //#region显示设备信息
     showInfo = function (options) {
+        //options
+         // deviceids:数组
         var data = {
             rows: []
         };
         var deferred = $.Deferred(function () {
             $.each(options.deviceids, function (index, value) {
-                device.getDataById(value).done(function (_data) {
-                    data.rows.push(_data);
-                });
+                var _data=device.getDataById(value);
+                data.rows.push(_data);
             });
         });
         if (data.rows.length <= 0) {
@@ -96,8 +112,15 @@
     }
     //#endregion
 
+    //#region选择设备的弹出框
+    select = function (options) {
+
+    }
+    //#endregion
 
 
     exports.showInfo = showInfo;
     exports.showComboGrid = showComboGrid;
+    exports.getDataById = getDataById;
+    exports.select = select;
 });

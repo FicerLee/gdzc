@@ -8,16 +8,25 @@
         <a id="resourcetransfer-btnexport" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">导出申请记录</a>
     </div>
     <div class="toolbar">
-        <span>关键词:</span>
-        <input type="text" value="" id="resourcetransfer-key" class="easyui-textbox" />
-        <span>设备类型:</span>
-        <input type="text" value="" id="resourcetransfer-category-combo" />
-        <span>单位部门:</span>
-        <input type="text" value="" id="resourcetransfer-company-combo" />
-        <span>申请时间:</span>
-        <input type="text" value="" id="resourcetransfer-startdate" class="easyui-datebox" data-options="editable:false,width:100" />
-        <input type="text" value="" id="resourcetransfer-enddate" class="easyui-datebox" data-options="editable:false,width:100" />
-        <a id="resourcetransfer-btnsearch" href="" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+        <div class="clear"></div>
+        <ul>
+            <li><input type="text" value="" id="resourcetransfer-key" class="easyui-textbox" data-options="prompt:'关键词'" /></li>
+            <li>
+                <input type="text" value="" id="resourcetransfer-category" style="width:160px;" />
+            </li>
+            <li>
+                <input type="text" value="" id="resourcetransfer-company" />
+            </li>
+            <li>
+                <span>申请时间:</span>
+                <input type="text" value="" id="resourcetransfer-startdate" class="easyui-datebox" data-options="editable:false,width:100" />
+                <input type="text" value="" id="resourcetransfer-enddate" class="easyui-datebox" data-options="editable:false,width:100" />
+            </li>
+            <li>
+                <a id="resourcetransfer-btnsearch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
     </div>
 </div>
 <div id="resourcetransfer-grid-contextmenu" class="easyui-menu">

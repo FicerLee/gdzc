@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var
         $gridContainer,
-        device,
+        view,
         login,
         deviceuser,
         company,
@@ -21,17 +21,18 @@
     category = require('app/app.devicecategory');
     assetproperty = require('app/app.assetproperty');
     repairstatus = require('app/app.repairstatus');
-    device = require('app/app.device');
+    view = require('app/app.device.view');
     deviceuser = require('app/app.deviceuser');
     fileexport = require('app/app.export');
     /*根据维修id获取维修记录*/
     getDataById = function (id) {
-        return Utility.getData({
+        var _data= Utility.getData({
             path: 'devicerepair/get',
             data: {
                 id: id
             }
         });
+        return _data ? null : _data.rows;
     }
     /*显示维修处理
      * options:
@@ -40,30 +41,30 @@
      *  action:'addnew'
      */
     showUpdate = function (options) {
+        var deferred=$.Deferred();
         var data = {};
         if (options.action == 'edit') {
             var _data = getDataById(options.id);
             data = $.extend(data, _data);
         }
         var tpl = require('tpl/devicerepair/devicerepair-form.html');
-        require('tpl/devicerepair/devicerepair-form.css');
+        var container = '#devicerepair-form';
         var output = Mustache.render(tpl, data);
-        var formContainer = '#devicerepair-form';
         $(output).dialog({
             modal: true,
             title: options.action == 'addnew' ? '新增维修信息' : '修改维修信息',
             width: 500,
             height: 230,
             onOpen: function () {
-                $.parser.parse(formContainer);
-                device.showComboGrid('#devicerepair-form-device', {
+                $.parser.parse(container);
+                view.showComboGrid(container + '-device', {
                     queryParams: {
-                        statusname: '故障停用'
+                        statusname:'故障停用'
                     }
                 });
             },
             onClose: function () {
-                $(formContainer).dialog('destroy', true);
+                $(container).dialog('destroy', true);
             }
         })
         //绑定事件对象
@@ -102,7 +103,7 @@
             path: 'auditrepairdevice/submit',
             params: options,
             success: function (res) {
-                $.messager.alert('成功',res.message, 'info');
+                $.messager.alert('成功','该设备已成功提交故障停用申请', 'info');
                 $('#devicerepair-form').dialog('close');
                 if ($gridContainer)
                     $gridContainer.datagrid('load', getFilter());
@@ -227,14 +228,16 @@
                     onClick: function (item) {
                         switch (item.name) {
                             case 'devicerepair-showDeviceInfo':
-                                device.showDeviceInfo(rowdata.deviceid);
+                                view.showInfo({
+                                    deviceids: [rowData.deviceid]
+                                });
                                 break;
                             case 'devicerepair-showUserInfo':
                                 if (!rowData.deviceuserid) {
                                     $.messager.alert('错误', '该维修记录里未包含使用人记录', 'error');
                                     return false;
                                 }
-                                deviceuser.showUserInfo(rowdata.deviceuserid);
+                                deviceuser.showUserInfo(rowData.deviceuserid);
                                 break;
                             case 'devicerepair-showAuditRepairDeviceConfirm':
                                 //维修结果确认

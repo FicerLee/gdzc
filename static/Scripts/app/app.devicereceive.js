@@ -3,7 +3,7 @@
         $container,
         company,
         login,
-        device,
+        view,
         deviceuser,
         category,
         workproperty,
@@ -16,7 +16,7 @@
         fileexport,
         init;
     login = require('app/app.login');
-    device = require('app/app.device');
+    view= require('app/app.device.view');
     deviceuser = require('app/app.deviceuser');
     company = require('app/app.company');
     category = require('app/app.devicecategory');
@@ -33,58 +33,61 @@
         return data!=null?null:data.rows;
     };
     doSearch = function () {
-        $container.datagrid('reload', getFilter());
+        $container.datagrid('reload');
     };
     /*新增领用*/
     showUpdate = function () {
         var tpl = require('tpl/devicereceive/devicereceive-form.html');
         require('tpl/devicereceive/devicereceive-form.css');
-        var formContainer = '#devicereceive-form';
+        var container= '#devicereceive-form';
         $(tpl).dialog({
             title: '新增设备领用',
             modal: true,
             width: 500,
             height: 200,
             onOpen: function () {
-                $.parser.parse(formContainer);
-                device.showComboGrid('#devicereceive-form-device',{
+                $.parser.parse(container);
+                view.showComboGrid(container+'-device',{
                     queryParams:{
                         statusname:'闲置可用'
                     }
                 });
-                deviceuser.showComboGrid('#devicereceive-form-user');
+                deviceuser.showComboGrid(container+'-user');
             },
             onClose: function () {
-                $(formContainer).dialog('destroy', true);
+                $(container).dialog('destroy', true);
             }
         });
         /*绑定事件*/
         //提交审核
-        $('#devicereceive-form-btnsubmit').on('click', function (e) {
+        $(container+'-btnsubmit').on('click', function (e) {
             e.preventDefault();
             var data = {
-                deviceid: $('#devicereceive-form-device').combogrid('getValue') || null,
-                deviceuserid: $('#devicereceive-form-user').combogrid('getValue') || null,
-                useaddress: $('#devicereceive-form-useaddress').val()
+                deviceid: $(container+'-device').combogrid('getValue') || null,
+                deviceuserid: $(container+'-user').combogrid('getValue') || null,
+                useaddress: $(container + '-useaddress').val(),
+                creatorid:login.getLocalUser().usercode
             };
             if (!data.deviceid || !data.deviceuserid) {
                 $.messager.alert('错误', '请选择设备和设备使用人', 'error');
                 return false;
             }
-            doSubmit(data);
+            doSubmit(data).done(function () {
+                $(container).dialog('close');
+            });
         });
     };
     doSubmit = function (data) {
-        Utility.saveData({
+        return Utility.saveData({
             path: 'auditreceiveuser/submit',
             params: data,
             success: function (res) {
                 $.messager.alert('成功', '该设备领用信息已成功提交', 'info');
             },
-            error: function (res) {
-                $.messager.alert('失败', res.message, 'error');
+            error: function (message) {
+                $.messager.alert('失败', message, 'error');
             }
-        })
+        });
     };
     getFilter = function () {
         return {
@@ -164,7 +167,9 @@
                             case 'devicereceive-showDeviceInfo':
                                 var deviceid = rowData.deviceid;
                                 if (!deviceid) return false;
-                                device.showDeviceInfo(deviceid);
+                                view.showInfo({
+                                    deviceids: [deviceid]
+                                });
                                 break;
                             case 'devicereceive-showUserInfo':
                                 var userid = rowData.deviceuserid;
