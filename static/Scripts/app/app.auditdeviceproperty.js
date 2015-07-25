@@ -6,6 +6,8 @@
         category,
         auditstatus,
         login,
+        view,
+        tag,
         showDeviceInfoByAuditId,
         showAuditInfo,
         doPass,
@@ -16,11 +18,13 @@
         reloadGrid,
         policy,
         init;
+    tag='#auditdeviceproperty';
     login = require('app/app.login');
     policy = require('app/app.policy');
     company = require('app/app.company');
     category = require('app/app.devicecategory');
     auditstatus = require('app/app.auditstatus');
+    view=require('app/app.device.view');
     getDataById = function (id) {
         var data = Utility.getData({
             path: 'auditeditdevice/get',
@@ -29,21 +33,19 @@
             }
         });
         return !data ? null : data.rows;
-    }
+    };
     reloadGrid = function () {
         if ($container) {
             $container.datagrid('load', getFilter());
         }
-    }
+    };
     showDeviceInfoByAuditId = function (auditid) {
         var auditdata = getDataById(auditid);
         if (!auditdata) return false;
-        require.async([
-            'app/app.device'
-        ], function (device) {
-            device.showDeviceInfo(auditdata.deviceid);
+        view.showInfo({
+            deviceids:[auditdata.deviceid]
         });
-    }
+    };
     showAuditInfo = function (id) {
         var data = getDataById(id);
         if (!data) return false;
@@ -51,44 +53,41 @@
             creatorname: data.creatorname,
             createddate: Utility.formatDate(data.createddate),
             values: data.propertychanges
-        }
-        require.async([
-            'tpl/auditdeviceproperty/auditdeviceproperty-form.html',
-            'tpl/auditdeviceproperty/auditdeviceproperty-form.css'
-        ], function (tpl, css) {
-            var output = Mustache.render(tpl, _data);
-            var formContainer = '#auditdeviceproperty-form';
-            $(output).dialog({
-                modal: true,
-                title: '设备属性变更审核明细',
-                width: 800,
-                height: 400,
-                onOpen: function () {
-                    $.parser.parse(formContainer);
-                },
-                onClose: function () {
-                    $(formContainer).dialog('destroy', true);
-                }
-            });
-            //绑定事件
-            $('#auditdeviceproperty-form-btnsubmit').on('click', function (e) {
-                e.preventDefault();
-                doPass(data.id);
-            });
-            $('#auditdeviceproperty-form-btnreject').on('click', function (e) {
-                e.preventDefault();
-                doReject(data.id);
-            })
-            $('#auditdeviceproperty-form-btnremove').on('click', function (e) {
-                e.preventDefault();
-                doRemove(data.id);
-            })
-            $('#auditdeviceproperty-form-btnresubmit').on('click', function (e) {
-                e.preventDefault();
-                doReSubmit(data.id);
-            });
-        })
-    }
+        };
+        var tpl=require('tpl/auditdeviceproperty/auditdeviceproperty-form.html');
+        var output = Mustache.render(tpl, _data);
+        var formContainer = '#auditdeviceproperty-form';
+        $(output).dialog({
+            modal: true,
+            title: '设备属性变更审核明细',
+            width: 800,
+            height: 400,
+            onOpen: function () {
+                $.parser.parse(formContainer);
+            },
+            onClose: function () {
+                $(formContainer).dialog('destroy', true);
+            }
+        });
+        //绑定事件
+        $('#auditdeviceproperty-form-btnsubmit').on('click', function (e) {
+            e.preventDefault();
+            doPass(data.id);
+        });
+        $('#auditdeviceproperty-form-btnreject').on('click', function (e) {
+            e.preventDefault();
+            doReject(data.id);
+        });
+        $('#auditdeviceproperty-form-btnremove').on('click', function (e) {
+            e.preventDefault();
+            doRemove(data.id);
+        });
+        $('#auditdeviceproperty-form-btnresubmit').on('click', function (e) {
+            e.preventDefault();
+            doReSubmit(data.id);
+        });
+
+    };
     getFilter = function () {
         return {
             key: $('#auditdeviceproperty-key').val(),
@@ -96,9 +95,13 @@
             categoryid: $('#auditdeviceproperty-category').combotree('getValue') || null,
             auditstatusid: $('#auditdeviceproperty-auditstatus').combobox('getValue') || null
         }
-    }
+    };
     init = function (container) {
         $container = $(container);
+        $(tag+'-startdate').datebox();
+        $(tag+'-enddate').datebox({
+            value:new Date().toString('yyyy-MM-dd')
+        });
         //显示单位信息
         company.showComboTree('#auditdeviceproperty-company');
         //显示设备类型
@@ -113,7 +116,11 @@
             }, {
                 field: 'statusname',
                 title: '审核状态',
-                width: 120
+                width: 80,
+                align:'right',
+                styler:function(value){
+                    return Utility.auditstatusStyle(value);
+                }
             }, {
                 field: 'assetno',
                 title: '资产编码',
@@ -122,7 +129,6 @@
             }, {
                 field: 'deviceno',
                 title: '设备型号',
-                width: 140,
                 sortable: true
             }, {
                 field: 'categoryname',
@@ -193,7 +199,11 @@
                                 doReject(rowData.id);
                                 break;
                             case 'auditdeviceproperty-doRemove':
-                                doRemove(rowData.id);
+                                $.messager.confirm('警告','是否确认删除此设备审核记录？',function(r){
+                                   if(r){
+                                       doRemove(rowData.id);
+                                   }
+                                });
                                 break;
                             case 'auditdeviceproperty-doReSubmit':
                                 doReSubmit(rowData.id);
@@ -249,7 +259,7 @@
             if (item2 && item2.target)
                 $(menu).menu('disableItem', item2.target);
         }
-    }
+    };
     doPass = function (id) {
         Utility.saveData({
             path: 'auditeditdevice/pass',
@@ -266,7 +276,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     doReject = function (id) {
         Utility.saveData({
             path: 'auditeditdevice/reject',
@@ -283,7 +293,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     doReSubmit = function (id) {
         Utility.saveData({
             path: 'auditeditdevice/resubmit',
@@ -300,7 +310,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     doRemove = function (id) {
         Utility.saveData({
             path: 'auditeditdevice/remove',
@@ -308,7 +318,7 @@
                 id: id,
                 completerid: login.getLocalUser().usercode
             },
-            success: function (res) {
+            success: function () {
                 $.messager.alert('成功', '该设备修改属性审核已删除', 'info');
                 $('#auditdeviceproperty-form').dialog('close');
                 reloadGrid();
@@ -317,6 +327,6 @@
                 $.messager.alert('失败', message, 'error');
             }
         })
-    }
+    };
     exports.init = init;
 });

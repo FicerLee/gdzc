@@ -1,6 +1,7 @@
 ﻿define(function (require, exports, module) {
     var
         $container,
+        tag,
         company,
         device,
         category,
@@ -17,6 +18,7 @@
         reloadGrid,
         policy,
         init;
+    tag='#auditnewdevice';
     login = require('app/app.login');
     company = require('app/app.company');
     category = require('app/app.devicecategory');
@@ -31,10 +33,10 @@
             }
         });
         return !data ? null : data.rows;
-    }
+    };
     reloadGrid = function () {
         $container.datagrid('load', getFilter());
-    }
+    };
     /*显示审核信息*/
     showAuditInfo = function (id) {
         var data = getDataById(id);
@@ -56,7 +58,7 @@
             onClose: function () {
                 $(formContainer).dialog('destroy', true);
             }
-        })
+        });
         /*绑定事件*/
         $('#auditnewdevice-form-btnpass').on('click', function (e) {
             e.preventDefault();
@@ -70,7 +72,7 @@
             e.preventDefault();
             doRemove(data.id);
         });
-    }
+    };
     /*审核通过*/
     doPass = function (id) {
         Utility.saveData({
@@ -88,7 +90,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         });
-    }
+    };
     doReject = function (id) {
         Utility.saveData({
             path: 'auditnewdevice/reject',
@@ -105,7 +107,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         });
-    }
+    };
     doRemove = function (id) {
         Utility.saveData({
             path: 'auditnewdevice/remove',
@@ -122,7 +124,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         });
-    }
+    };
     doReSubmit = function (id) {
         Utility.saveData({
             path: 'auditnewdevice/resubmit',
@@ -139,7 +141,7 @@
                 $.messager.alert('失败', message, 'error');
             }
         });
-    }
+    };
     getFilter = function () {
         return {
             key: $('#auditnewdevice-key').val(),
@@ -149,9 +151,13 @@
             createdstartdate: $('#auditnewdevice-startdate').datebox('getValue') || null,
             createdenddate:$('#auditnewdevice-enddate').datebox('getValue')||null
         };
-    }
+    };
     init = function (container) {
         $container = $(container);
+        $(tag+'-startdate').datebox();
+        $(tag+'-enddate').datebox({
+            value:new Date().toString('yyyy-MM-dd')
+        });
         //显示单位信息
         company.showComboTree('#auditnewdevice-company');
         //显示设备类型
@@ -166,7 +172,11 @@
             }, {
                 field: 'statusname',
                 title: '审核状态',
-                width: 120
+                width: 80,
+                align:'right',
+                styler:function(value){
+                    return Utility.auditstatusStyle(value);
+                }
             },{
                 field: 'assetno',
                 title: '资产编码',
@@ -303,17 +313,14 @@
             policyname: '允许新增设备审核',
             groupname: '设备审核'
         })) {
-            var item = $(menuContainer).menu('findItem', '审核通过');
-            if (item && item.target)
-                $(menuContainer).menu('disableItem', item.target);
-            var item1 = $(menuContainer).menu('findItem', '审核退回');
-            if (item1 && item1.target)
-                $(menuContainer).menu('disableItem', item1.target);
-            var item2 = $(menuContainer).menu('findItem', '审核删除');
-            if (item2 && item2.target)
-                $(menuContainer).menu('disableItem', item2.target);
+            $.each([
+                '审核通过','审核退回','审核删除'
+            ],function(index,value){
+                var item = $(menuContainer).menu('findItem',value);
+                if (item && item.target)
+                    $(menuContainer).menu('disableItem', item.target);
+            });
         };
-    }
-    /*检查确认权限*/
+    };
     exports.init = init;
 });
