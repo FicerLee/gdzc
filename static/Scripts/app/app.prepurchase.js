@@ -18,7 +18,7 @@
     init = function (container) {
         /**/
         $('#prepurchase-year').numberspinner({
-            value: new Date().getFullYear(),
+            value: new Date().getFullYear()+1,
             required: true
         });
         state.showCombo('#prepurchase-state');

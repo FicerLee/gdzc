@@ -52,17 +52,17 @@
                     field: 'companyname',
                     title: '部门单位'
                 }, {
-                    field: 'assetbelong',
+                    field: 'assetbelongname',
                     title: '资产归属'
                 }, {
                     field: 'createddate',
                     title: '申请转移时间',
                     width:130
                 }, {
-                    field: 'originalassetproperty',
+                    field: 'oldpropertyname',
                     title: '原资源属性'
                 }, {
-                    field: 'newassetproperty',
+                    field: 'newpropertyname',
                     title: '申请资源属性'
                 }, {
                     field: 'completeddate',
@@ -181,9 +181,11 @@
                         try {
                             if (!_data.deviceid)
                                 throw new Error('设备不能为空');
-                            if (!_data.assetpropertyid)
+                            if (!_data.newpropertyid)
                                 throw new Error('设备资产属性不能为空');
-                            if(!_data.assetpropertyid!==_data.oldpropertyid)
+                            if (!_data.oldpropertyid)
+                                throw new Error('原有设备资产属性不能为空');
+                            if(!_data.newpropertyid==_data.oldpropertyid)
                                 throw new Error('更改的资产属性不能相同');
                         } catch (e) {
                             $.messager.alert('错误', e.message, 'warning');

@@ -21,7 +21,7 @@
         belong.showCombo('#auditpurchaseplan-belong');
         state.showViewAuditCombo('#auditpurchaseplan-state');
         $('#auditpurchaseplan-year').numberspinner({
-            value: new Date().getFullYear()
+            value: new Date().getFullYear()+1
         });
         $(container).datagrid({
             columns: [[

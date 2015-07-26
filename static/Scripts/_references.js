@@ -71,3 +71,5 @@
 /// <reference path="app/app.device.view.js" />
 /// <reference path="datagrid-scrollview.js" />
 /// <reference path="app/app.devicestop.js" />
+/// <reference path="hcharts/highcharts.js" />
+/// <reference path="hcharts/modules/exporting.js" />

@@ -5,6 +5,8 @@
         belong,
         postproperty,
         category,
+        tag,
+        fileexport,
         auditstatus,
         getFilter,
         getPlan,
@@ -23,6 +25,8 @@
     category = require('app/app.devicecategory');
     auditstatus = require('app/app.auditstatus');
     postproperty = require('app/app.postproperty');
+    fileexport = require('app/app.export');
+    tag='#investplan';
     /*获取折旧清单
      * year,
      * belongid
@@ -561,11 +565,13 @@
             $('#investplan-form').dialog('close');
         });
     }
+
+    //#region初始化
     init = function (container) {
         $('#investplan-year').numberspinner({
             min: 2007,
             max: 2020,
-            value:new Date().getFullYear()
+            value:new Date().getFullYear()+1
         })
         company.showComboTree('#investplan-company');
         belong.showCombo('#investplan-belong');
@@ -595,7 +601,12 @@
                 }
             }, {
                 field: 'statusname',
-                title: '审核状态'
+                title: '审核状态',
+                width: 80,
+                align: 'right',
+                styler: function (value) {
+                    return Utility.auditstatusStyle(value);
+                }
             }, {
                 field: 'companyname',
                 title: '公司部门'
@@ -639,7 +650,7 @@
             fit: true,
             idField: 'id',
             rownumbers: true,
-            singleSelect: false,
+            singleSelect: true,
             border: false,
             pagination: true,
             toolbar: '#investplan-toolbar',
@@ -672,7 +683,7 @@
         /*绑定事件*/
         //投资计划处理
         $('#investplan-btnedit').linkbutton({
-            disabled: !login.getLocalUser().enablesumitinvestplan,
+            disabled: !login.getLocalUser().enablesubmitinvestplan,
             onClick: function () {
                 var belongid = $('#investplan-belong').combobox('getValue') || null;
                 var year = $('#investplan-year').numberspinner('getValue') || 0;
@@ -697,9 +708,26 @@
         });
         /*导出投资计划*/
         $('#investplan-btnexport').linkbutton({
-            disabled: !login.getLocalUser().enablesumitinvestplan,
+            disabled: !login.getLocalUser().enablesubmitinvestplan,
             onClick: function () {
-
+                var fields = $(tag + '-grid').datagrid('getColumnFields');
+                var columns = {};
+                $.each(fields, function (inde, value) {
+                    var o = $(tag + '-grid').datagrid('getColumnOption', value);
+                    columns[o.field] = o.title;
+                });
+                Utility.saveData({
+                    path: 'investplan/exportfile',
+                    params: {
+                        columns:columns
+                    },
+                    success: function (res) {
+                        fileexport.showDialog({
+                            title: '年度投资计划提交明细',
+                            rows: res.rows
+                        });
+                    }
+                })
             }
         });
         /*提交投资计划*/
@@ -710,5 +738,6 @@
         /*检查菜单权限*/
 
     }
+    //#endregion
     exports.init = init;
 });

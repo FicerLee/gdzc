@@ -48,7 +48,7 @@
         $('#auditinvestplan-year').numberspinner({
             min: 2007,
             max: 2020,
-            value: new Date().getFullYear()
+            value: new Date().getFullYear()+1
         });
         belong.showCombo('#auditinvestplan-belong');
         category.showComboTree('#auditinvestplan-category');
